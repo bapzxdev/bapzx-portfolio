@@ -3,138 +3,30 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BAPZX — RUBINI COINS &amp; Service</title>
-<meta name="description" content="BAPZX: vendas e serviços online para Rubini Coins (RC) e Service dedicado a UP level no Rubinot. Pagamento via Pix, entrega rápida no trade.">
+<title>BAPZX — Rubini Coins (RC) &amp; Service</title>
+<meta name="description" content="BAPZX: vendas e serviços online. Rubini Coins (RC) e Service dedicado a UP level no Rubinot. Pagamento via Pix e atendimento no Telegram e WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#070b14; --bg2:#0c1220; --panel:#101a2b; --panel2:#0e1726;
-  --border:#1e2c40; --text:#e6edf5; --muted:#8ea0b8;
-  --green:#34d399; --blue:#60a5fa;
-  --grad:linear-gradient(135deg,#34d399 0%,#4ade80 35%,#60a5fa 100%);
-  --radius:16px; --shadow:0 20px 60px rgba(0,0,0,.45);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;overflow-x:hidden}
-.wrap{max-width:1000px;margin:0 auto;padding:0 22px}
-h1,h2,h3{font-family:'Sora',sans-serif}
-a{color:var(--blue);text-decoration:none}
-.icon{font-style:normal}
-
-/* ===== Nav ===== */
-nav{position:sticky;top:0;z-index:50;background:rgba(7,11,20,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-.nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
-.brand{font-family:'Sora',sans-serif;font-weight:800;font-size:22px;letter-spacing:2px;color:#fff}
-.brand em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.menu{display:flex;gap:6px;flex-wrap:wrap}
-.menu a{color:var(--muted);font-size:14px;padding:8px 12px;border-radius:9px;transition:.2s}
-.menu a:hover{color:#fff;background:rgba(52,211,153,.12)}
-
-/* ===== Hero ===== */
-header.hero{position:relative;text-align:center;padding:96px 22px 64px;overflow:hidden}
-header.hero::before{content:"";position:absolute;inset:0 0 auto 0;height:420px;background:
-  radial-gradient(600px 300px at 15% 0%,rgba(52,211,153,.16),transparent 60%),
-  radial-gradient(600px 300px at 85% 10%,rgba(96,165,250,.14),transparent 60%);pointer-events:none}
-.toptag{display:inline-block;border:1px solid rgba(52,211,153,.4);color:#7ee7b5;background:rgba(52,211,153,.08);
-  border-radius:999px;padding:6px 16px;font-size:13px;margin-bottom:22px;letter-spacing:.5px}
-.hero h1{font-size:64px;letter-spacing:6px;line-height:1.05;color:#fff}
-.hero h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 28px rgba(74,222,128,.35))}
-.hero h2{font-size:22px;font-weight:500;color:var(--muted);margin:14px 0 10px;letter-spacing:.5px}
-.hero p{max-width:640px;margin:0 auto 30px;color:var(--muted);font-size:17px}
-.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:9px;background:var(--grad);color:#04111b;font-weight:700;
-  padding:15px 28px;border-radius:12px;transition:.2s;box-shadow:0 10px 30px rgba(52,211,153,.25)}
-.btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(52,211,153,.4)}
-.btn.ghost{background:transparent;border:1px solid var(--border);color:var(--text);box-shadow:none}
-.btn.ghost:hover{border-color:var(--blue);color:#fff;box-shadow:none}
-.btn.wa{background:linear-gradient(135deg,#0b3d26,#14532d);color:#7ee7b5;box-shadow:none}
-.btn.wa:hover{box-shadow:0 10px 30px rgba(20,83,45,.35)}
-.stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:52px}
-.stats b{display:block;font-family:'Sora',sans-serif;font-size:30px;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.stats span{font-size:13px;color:var(--muted)}
-
-/* ===== Sections ===== */
-section{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:34px 30px;margin:26px 0}
-section .kicker{color:#7ee7b5;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
-section h2{font-size:26px;margin-bottom:10px}
-section .sub{color:var(--muted);margin-bottom:24px}
-.row{display:grid;gap:14px}
-.c2{grid-template-columns:1fr 1fr}
-.c3{grid-template-columns:repeat(3,1fr)}
-@media(max-width:720px){.c2,.c3{grid-template-columns:1fr}}
-
-/* ===== Table of coins ===== */
-table{width:100%;border-collapse:collapse;margin:6px 0 18px}
-th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--border)}
-th{color:var(--muted);font-weight:600;font-size:13px}
-td{font-size:16px}
-.prow:hover{background:var(--panel2)}
-.price{font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.ident{font-size:14px;color:var(--muted);margin:10px 0 0}
-
-/* ===== Steps ===== */
-.steps{display:grid;gap:16px;grid-template-columns:repeat(2,1fr)}
-@media(max-width:720px){.steps{grid-template-columns:1fr}}
-.step{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:18px;position:relative}
-.step b{display:flex;align-items:center;gap:10px;font-family:'Sora',sans-serif;font-size:16px;margin-bottom:6px}
-.step em{font-style:normal;font-family:'Sora',sans-serif;font-weight:800;font-size:13px;color:#04111b;background:var(--grad);
-  border-radius:8px;width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center}
-.step p{color:var(--muted);font-size:14px}
-
-/* ===== Service gallery ===== */
-.svc{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:20px}
-.svc h3{font-size:15px;margin:0 0 4px}
-.svc p{color:var(--muted);font-size:13.5px;margin:0}
-.svc .tag{display:inline-block;background:rgba(52,211,153,.12);color:#7ee7b5;border-radius:999px;padding:2px 10px;font-size:12px;margin:10px 0 8px}
-
-/* ===== Testimonials ===== */
-.tst{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:18px}
-.tst blockquote{color:var(--text);font-size:14.5px;font-style:italic;margin-bottom:12px}
-.tst cite{font-style:normal;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted)}
-.ava{width:34px;height:34px;border-radius:50%;background:var(--grad);color:#04111b;font-weight:800;display:inline-flex;align-items:center;justify-content:center}
-
-/* ===== FAQ ===== */
-details{background:var(--panel2);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;padding:4px 18px}
-summary{cursor:pointer;padding:14px 0;font-weight:600;color:var(--text);display:flex;justify-content:space-between;align-items:center}
-summary::after{content:"+";color:var(--green);font-size:20px;font-weight:700}
-details[open] summary::after{content:"–"}
-details p{color:var(--muted);font-size:14.5px;padding-bottom:16px}
-
-/* ===== Footer ===== */
-footer{border-top:1px solid var(--border);margin-top:10px;padding:40px 0 30px;text-align:center;color:var(--muted);font-size:14px}
-footer .brand{margin-bottom:8px}
-.fmini{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin:14px 0 20px}
-.fmini a{color:var(--muted)}
-.fmini a:hover{color:#fff}
-
-/* ===== Reveal animation ===== */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
-.reveal.in{opacity:1;transform:none}
-@media(max-width:640px){.hero h1{font-size:42px;letter-spacing:3px}}
-</style>
+<link href="styles.css" rel="stylesheet">
 </head>
 <body>
 
 <nav>
   <div class="wrap nav-in">
-    <div class="brand">BAP<em>ZX</em></div>
+    <div class="brand">BAP<span>ZX</span></div>
     <div class="menu">
-      <a href="#coins">Rubini Coins</a>
-      <a href="#como">Como comprar</a>
-      <a href="#service">Service</a>
+      <a href="rubini.html" target="_blank" rel="noopener">Rubini Coins</a>
+      <a href="como-comprar.html" target="_blank" rel="noopener">Como comprar</a>
+      <a href="service.html" target="_blank" rel="noopener">Service</a>
       <a href="itens.html" target="_blank" rel="noopener">Venda de Itens</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contato">Contato</a>
+      <a href="faq.html" target="_blank" rel="noopener">FAQ</a>
+      <a href="contato.html" target="_blank" rel="noopener">Contato</a>
     </div>
   </div>
 </nav>
 
 <header class="hero">
-  <span class="toptag">BAPZX &middot; área de vendas e serviços online</span>
   <h1>BAP<span>ZX</span></h1>
   <h2>Rubini Coins (RC) e Service dedicado a UP level no Rubinot</h2>
   <p>Compras de Rubini Coins (RC) rápidas e seguras com pagamento via Pix, ou feche um Service de UP level com hora marcada. Atendimento direto no Telegram e WhatsApp.</p>
@@ -142,110 +34,17 @@ footer .brand{margin-bottom:8px}
     <a class="btn" href="https://t.me/bapzx_bot">Comprar no Telegram</a>
     <a class="btn wa" href="https://wa.me/5519991813598">WhatsApp (19) 99181-3598</a>
   </div>
-  <div class="stats">
-    <div><b>10 MIN</b><span>prazo de entrega no trade</span></div>
-    <div><b>PIX</b><span>pagamento automático</span></div>
-    <div><b>24/7</b><span>bot no Telegram</span></div>
-  </div>
 </header>
 
-<div class="wrap">
-
-  <section id="coins" class="reveal">
-    <div class="kicker">Loja oficial</div>
-    <h2>Rubini Coins <span class="icon">🪙</span></h2>
-    <p class="sub">Venda de Rubini Coins (RC) da BAPZX. Pagamento via Pix e entrega por trade in-game em até 10 minutos após a confirmação do pagamento.</p>
-    <table>
-      <tr><th>Quantidade</th><th>Preço</th></tr>
-      <tr class="prow"><td>100 RC</td><td class="price">R$ 9,00</td></tr>
-      <tr class="prow"><td>250 RC</td><td class="price">R$ 22,50</td></tr>
-      <tr class="prow"><td>500 RC</td><td class="price">R$ 45</td></tr>
-      <tr class="prow"><td>1.000 RC</td><td class="price">R$ 90</td></tr>
-      <tr class="prow"><td>2.500 RC</td><td class="price">R$ 225</td></tr>
-    </table>
-    <p class="ident">Outras quantidades: proporcionais a R$ 90 por 1.000 RC, pago via Pix.</p>
-  </section>
-
-  <section id="como" class="reveal">
-    <div class="kicker">Passo a passo</div>
-    <h2>Como comprar</h2>
-    <p class="sub">Do pedido ao trade em poucos minutos.</p>
-    <div class="steps">
-      <div class="step"><b><em>1</em> Abra o bot</b><p>Toque em <b>t.me/bapzx_bot</b> e envie /start.</p></div>
-      <div class="step"><b><em>2</em> Informe seus dados</b><p>Char, quantidade de RC, mundo e pagamento (Pix).</p></div>
-      <div class="step"><b><em>3</em> Pague por QR Code</b><p>O bot gera o QR Pix da hora. A confirmação chega sozinha.</p></div>
-      <div class="step"><b><em>4</em> Receba no trade</b><p>Entrega em até 10 minutos após o pagamento confirmar.</p></div>
-    </div>
-  </section>
-
-  <section id="service" class="reveal">
-    <div class="kicker">Service BAPZX</div>
-    <h2>Service dedicado a UP level <span class="icon">⚔️</span></h2>
-    <p class="sub">Horas de UP level no Rubinot, agendadas pelo WhatsApp. <b>R$ 20 por hora.</b></p>
-    <div class="row c3">
-      <div class="svc"><h3>UP level guiado</h3><span class="tag">Exemplo de service</span><p>Horas direcionadas de evolução com metas por sessão.</p></div>
-      <div class="svc"><h3>Maratona de UP</h3><span class="tag">Exemplo de service</span><p>Pacotes de horas avulsas para subir rápido no Rubinot.</p></div>
-      <div class="svc"><h3>UP + Suporte</h3><span class="tag">Exemplo de service</span><p>UP level com orientação de build, equipamentos e rotas.</p></div>
-    </div>
-    <p class="ident">Para solicitar ou combinar horários, chame no WhatsApp:</p>
-    <p style="margin-top:14px"><a class="btn wa" href="https://wa.me/5519991813598">Chamar no WhatsApp</a></p>
-  </section>
-
-  <section class="reveal">
-    <div class="kicker">Números e clientes</div>
-    <h2>Resultados recentes</h2>
-    <div class="row c3" style="margin-bottom:22px">
-      <div class="svc" style="text-align:center"><h3>X pedidos</h3><p>entregues no trade</p></div>
-      <div class="svc" style="text-align:center"><h3>&le; 10 min</h3><p>tempo médio de entrega</p></div>
-      <div class="svc" style="text-align:center"><h3>100% Pix</h3><p>pagamento automático</p></div>
-    </div>
-    <div class="row c3">
-      <div class="tst"><blockquote>“Compra rápida, bot respondendo na hora e o trade veio certinho. Recomendo!”</blockquote><cite><span class="ava">R</span>Cliente do Telegram</cite></div>
-      <div class="tst"><blockquote>“Service de UP funcionou direitinho, horas certinhas e evolução visível.”</blockquote><cite><span class="ava">V</span>Cliente do Service</cite></div>
-      <div class="tst"><blockquote>“Paguei por Pix e em minutos já tinha as RC na conta. Nota 10.”</blockquote><cite><span class="ava">L</span>Cliente do Telegram</cite></div>
-    </div>
-  </section>
-
-  <section id="faq" class="reveal">
-    <div class="kicker">Dúvidas</div>
-    <h2>Perguntas frequentes</h2>
-    <p class="sub">Respostas rápidas para as dúvidas mais comuns.</p>
-    <details open><summary>Como recebo as Rubini Coins?</summary><p>Via trade in-game no seu char/mundo, em até 10 minutos depois que o pagamento Pix é confirmado.</p></details>
-    <details><summary>Quais as formas de pagamento?</summary><p>Pix. O bot gera o QR Code automaticamente ao fechar o pedido — sem envio manual de chave.</p></details>
-    <details><summary>É seguro comprar?</summary><p>Sim. O pagamento é recebido de forma automatizada e o atendimento acontece pelo bot oficial no Telegram.</p></details>
-    <details><summary>Como funciona o Service BAPZX?</summary><p>Hora de UP level no Rubinot, R$ 20 por hora, agendada pelo WhatsApp (19) 99181-3598.</p></details>
-    <details><summary>Compras por outros valores?</summary><p>São proporcionais a R$ 90 por 1.000 RC. Me chame no bot que eu calculo na hora.</p></details>
-    <details><summary>Preciso de chip ou conta especial?</summary><p>Não. Só me informar o char, quantidade, mundo e escolher Pix no pagamento.</p></details>
-  </section>
-
-  <section id="itens" class="reveal">
-    <div class="kicker">Venda de Itens</div>
-    <h2>Itens do jogo à venda <span class="icon">⚒️</span></h2>
-    <p class="sub">Além das Rubini Coins, a BAPZX também vende itens avulsos. A lista e os preços ficam numa página própria.</p>
-    <p style="margin-top:14px"><a class="btn" href="itens.html" target="_blank" rel="noopener">Ver itens à venda</a></p>
-  </section>
-
-  <section id="contato" class="reveal">
-    <div class="kicker">Fale com a gente</div>
-    <h2>Contato</h2>
-    <p class="sub">Atendimento humano também disponível.</p>
-    <div class="row c2">
-      <div class="svc"><h3>💬 Telegram</h3><p>Bot oficial: <a href="https://t.me/bapzx_bot">@bapzx_bot</a> — compras e IA de atendimento 24/7.</p></div>
-      <div class="svc"><h3>📱 WhatsApp</h3><p>Service e atendimento humano: <a href="https://wa.me/5519991813598">(19) 99181-3598</a>.</p></div>
-    </div>
-  </section>
-
-</div>
-
 <footer>
-  <div class="brand">BAP<em>ZX</em></div>
+  <div class="brand">BAP<span>ZX</span></div>
   <p style="color:var(--muted);font-size:13px">Vendas e serviços online da BAPZX &middot; Rubini Coins (RC) &middot; Service para Rubinot</p>
   <div class="fmini">
     <a href="https://github.com/lucascristianini1-netizen">GitHub</a>
     <a href="https://t.me/bapzx_bot">Telegram</a>
     <a href="https://wa.me/5519991813598">WhatsApp</a>
   </div>
-  <p style="font-size:12px">Portfólio BAPZX &middot; v2.0</p>
+  <p style="font-size:12px">Portfólio BAPZX &middot; v3.0</p>
 </footer>
 
 <script>

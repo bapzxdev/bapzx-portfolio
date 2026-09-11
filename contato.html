@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contato — BAPZX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="styles.css" rel="stylesheet">
+</head>
+<body>
+<nav><div class="wrap nav-in">
+  <div class="brand"><a href="index.html" style="color:inherit;text-decoration:none">BAP<span>ZX</span></a></div>
+  <div class="menu">
+    <a href="rubini.html">Rubini Coins</a>
+    <a href="como-comprar.html">Como comprar</a>
+    <a href="service.html">Service</a>
+    <a href="itens.html">Venda de Itens</a>
+    <a href="faq.html">FAQ</a>
+    <a class="active" href="contato.html">Contato</a>
+  </div>
+</div></nav>
+
+<header class="wrap back">
+  <a href="index.html" class="btn ghost">← Voltar ao site principal</a>
+</header>
+
+<div class="wrap">
+  <section>
+    <div class="kicker">Fale com a gente</div>
+    <h2>Contato</h2>
+    <p class="sub">Atendimento humano também disponível.</p>
+    <div class="row c2">
+      <div class="svc"><h3>💬 Telegram</h3><p>Bot oficial: <a href="https://t.me/bapzx_bot">@bapzx_bot</a> — compras e IA de atendimento 24/7.</p></div>
+      <div class="svc"><h3>📱 WhatsApp</h3><p>Service e atendimento humano: <a href="https://wa.me/5519991813598">(19) 99181-3598</a>.</p></div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="brand">BAP<span>ZX</span></div>
+  <p style="color:var(--muted);font-size:13px">Vendas e serviços online da BAPZX &middot; Rubini Coins (RC) &middot; Service para Rubinot</p>
+  <div class="fmini">
+    <a href="index.html">Site principal</a>
+    <a href="https://github.com/lucascristianini1-netizen">GitHub</a>
+    <a href="https://t.me/bapzx_bot">Telegram</a>
+    <a href="https://wa.me/5519991813598">WhatsApp</a>
+  </div>
+  <p style="font-size:12px">Portfólio BAPZX &middot; Contato</p>
+</footer>
+<script>
+const io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll(".reveal").forEach(function(el){io.observe(el)});
+</script>
+</body>
+</html>
