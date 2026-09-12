@@ -31,7 +31,8 @@ section .kicker{color:#7ee7b5;font-size:13px;letter-spacing:2px;text-transform:u
 section h2{font-size:26px;margin-bottom:10px}
 section .sub{color:var(--muted);margin-bottom:24px}
 .back{margin:26px 0 0}
-.row{display:grid;gap:14px}.c2{grid-template-columns:1fr 1fr}.c3{grid-template-columns:repeat(3,1fr)}
+.row{display:grid;gap:14px}.c2{grid-template-columns:1fr 1fr}.c3{grid-template-columns:repeat(3,1fr)}.c4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.c4{grid-template-columns:1fr 1fr}}
 @media(max-width:720px){.c2,.c3{grid-template-columns:1fr}}
 
 .card{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:18px}
