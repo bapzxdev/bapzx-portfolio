@@ -4,11 +4,30 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Venda de Itens — BAPZX</title>
-<meta name="description" content="Venda de itens in-game da BAPZX. Loja de itens em preparação — anuncie interesse e seja avisado quando abrir.">
+<meta name="description" content="Venda de itens in-game da BAPZX. Loja de itens com entrega via Telegram.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link href="styles.css" rel="stylesheet">
+<style>
+.itens-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-top:22px}
+.item-card{background:#111a2e;border:1px solid #1e2c40;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s}
+.item-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.item-card .item-img{width:100%;aspect-ratio:4/3;object-fit:cover;background:#0b1120}
+.item-card .item-body{padding:16px 18px;flex:1;display:flex;flex-direction:column}
+.item-card .item-cat{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#34d399;margin-bottom:4px}
+.item-card .item-name{font-family:'Sora',sans-serif;font-weight:700;font-size:18px;color:#fff;margin:0 0 4px}
+.item-card .item-price{font-size:20px;font-weight:800;color:#4ade80;margin-bottom:10px}
+.item-card .item-desc{font-size:13px;color:#8ea0b8;line-height:1.55;margin:0;flex:1}
+.item-card .item-cta{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+.item-card .item-cta a{flex:1;text-align:center;text-decoration:none;padding:10px 0;border-radius:8px;font-weight:700;font-size:13px}
+.item-card .item-cta .cta-wa{background:#25d366;color:#000}
+.item-card .item-cta .cta-tg{background:#0088cc;color:#fff}
+.empty-msg{color:#64748b;text-align:center;padding:40px 0;font-size:15px}
+.loading-msg{color:#64748b;text-align:center;padding:40px 0;font-size:15px}
+@keyframes pulse{0%,100%{opacity:.6}50%{opacity:1}}
+.loading-msg{animation:pulse 1.5s ease-in-out infinite}
+</style>
 </head>
 <body>
 <nav><div class="wrap nav-in">
@@ -32,12 +51,10 @@
   <section>
     <div class="kicker">BAPZX — Venda de Itens</div>
     <h2>Itens do jogo <span class="icon">⚒️</span></h2>
-    <p class="sub">A BAPZX também vende itens in-game. A loja de itens está em preparação — os produtos serão anunciados aqui assim que estiverem disponíveis.</p>
+    <p class="sub">A BAPZX também vende itens in-game. Confira os itens disponíveis ou anuncie interesse.</p>
 
-    <div class="row c3">
-      <div class="svc"><h3>🛒 Itens em breve</h3><p>Equipamentos, itens raros e muito mais. Fique ligado.</p></div>
-      <div class="svc"><h3>📲 Chamar no WhatsApp</h3><p>Anuncie seu interesse ou tire dúvidas direto no WhatsApp.</p></div>
-      <div class="svc"><h3>🤖 Bot no Telegram</h3><p>Enquanto a loja de itens não abre, as BAPZX COINS já têm entrega imediata.</p></div>
+    <div id="itens-container">
+      <p class="loading-msg">Carregando itens...</p>
     </div>
 
     <div class="cta-row" style="margin-top:26px">
@@ -60,8 +77,55 @@
   <p style="font-size:12px">Portfólio BAPZX &middot; Venda de Itens</p>
 </footer>
 <script>
-const io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12});
-document.querySelectorAll(".reveal").forEach(function(el){io.observe(el)});
+var API_BASE = "https://bapzx-bot-tibia.onrender.com";
+var container = document.getElementById("itens-container");
+
+function esc(s) {
+  var d = document.createElement("div");
+  d.appendChild(document.createTextNode(s));
+  return d.innerHTML;
+}
+
+function renderItens(itens) {
+  if (!itens || itens.length === 0) {
+    container.innerHTML = '<p class="empty-msg">Nenhum item disponível no momento. Fique ligado!</p>';
+    return;
+  }
+  var html = '<div class="itens-grid">';
+  itens.forEach(function (it) {
+    var img = it.imagem ? '<img class="item-img" src="' + esc(it.imagem) + '" alt="' + esc(it.nome) + '" onerror="this.style.display=\'none\'">' : '';
+    var cat = it.categoria ? '<div class="item-cat">' + esc(it.categoria) + '</div>' : '';
+    var price = it.preco ? '<div class="item-price">' + esc(it.preco) + '</div>' : '';
+    var desc = it.descricao ? '<p class="item-desc">' + esc(it.descricao) + '</p>' : '';
+    html += '<div class="item-card">'
+      + img
+      + '<div class="item-body">'
+      + cat
+      + '<div class="item-name">' + esc(it.nome || '-') + '</div>'
+      + price
+      + desc
+      + '<div class="item-cta">'
+      + '<a class="cta-wa" href="https://wa.me/5519991813598?text=' + encodeURIComponent('Quero: ' + (it.nome || '')) + '">WhatsApp</a>'
+      + '<a class="cta-tg" href="https://t.me/bapzx_bot">Telegram</a>'
+      + '</div></div></div>';
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function load() {
+  fetch(API_BASE + "/api/itens")
+    .then(function (r) { return r.json(); })
+    .then(function (data) { renderItens(data.itens || []); })
+    .catch(function () { renderItens([]); });
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", load);
+} else {
+  load();
+}
 </script>
+<script src="track.js" defer></script>
 </body>
 </html>
