@@ -65,6 +65,16 @@
     <p class="ident">Quer um item específico? Chame no WhatsApp que a gente te dá a previsão.</p>
   </section>
 
+  <section style="margin-top:54px">
+    <div class="kicker">BAPZX — Serviços</div>
+    <h2>Serviços <span class="icon">🛡️</span></h2>
+    <p class="sub">Além da venda de itens, a BAPZX oferece serviços. Confira abaixo.</p>
+
+    <div id="servicos-container">
+      <p class="loading-msg">Carregando serviços...</p>
+    </div>
+  </section>
+
 </div>
 
 <footer>
@@ -84,6 +94,7 @@
 <script>
 var API_BASE = "https://bapzx-bot-tibia.onrender.com";
 var container = document.getElementById("itens-container");
+var servContainer = document.getElementById("servicos-container");
 
 function esc(s) {
   var d = document.createElement("div");
@@ -91,31 +102,42 @@ function esc(s) {
   return d.innerHTML;
 }
 
+function renderCard(it, ctaPrefix) {
+  var img = it.imagem ? '<img class="item-img" src="' + esc(it.imagem) + '" alt="' + esc(it.nome) + '" onerror="this.style.display=\'none\'">' : '';
+  var cat = it.categoria ? '<div class="item-cat">' + esc(it.categoria) + '</div>' : '';
+  var price = it.preco ? '<div class="item-price">' + esc(it.preco) + '</div>' : '';
+  var desc = it.descricao ? '<p class="item-desc">' + esc(it.descricao) + '</p>' : '';
+  return '<div class="item-card">'
+    + img
+    + '<div class="item-body">'
+    + cat
+    + '<div class="item-name">' + esc(it.nome || '-') + '</div>'
+    + price
+    + desc
+    + '<div class="item-cta">'
+    + '<a class="cta-wa" href="https://wa.me/5519991813598?text=' + encodeURIComponent(ctaPrefix + (it.nome || '')) + '">WhatsApp</a>'
+    + '<a class="cta-tg" href="https://t.me/bapzx_bot">Telegram</a>'
+    + '</div></div></div>';
+}
+
 function renderItens(itens) {
   if (!itens || itens.length === 0) {
     container.innerHTML = '<p class="empty-msg">Nenhum item disponível no momento. Fique ligado!</p>';
     return;
   }
-  var html = '<div class="itens-grid">';
-  itens.forEach(function (it) {
-    var img = it.imagem ? '<img class="item-img" src="' + esc(it.imagem) + '" alt="' + esc(it.nome) + '" onerror="this.style.display=\'none\'">' : '';
-    var cat = it.categoria ? '<div class="item-cat">' + esc(it.categoria) + '</div>' : '';
-    var price = it.preco ? '<div class="item-price">' + esc(it.preco) + '</div>' : '';
-    var desc = it.descricao ? '<p class="item-desc">' + esc(it.descricao) + '</p>' : '';
-    html += '<div class="item-card">'
-      + img
-      + '<div class="item-body">'
-      + cat
-      + '<div class="item-name">' + esc(it.nome || '-') + '</div>'
-      + price
-      + desc
-      + '<div class="item-cta">'
-      + '<a class="cta-wa" href="https://wa.me/5519991813598?text=' + encodeURIComponent('Quero: ' + (it.nome || '')) + '">WhatsApp</a>'
-      + '<a class="cta-tg" href="https://t.me/bapzx_bot">Telegram</a>'
-      + '</div></div></div>';
-  });
-  html += '</div>';
-  container.innerHTML = html;
+  container.innerHTML = '<div class="itens-grid">' + itens.map(function (it) {
+    return renderCard(it, "Quero: ");
+  }).join("") + '</div>';
+}
+
+function renderServicos(servicos) {
+  if (!servicos || servicos.length === 0) {
+    servContainer.innerHTML = '<p class="empty-msg">Nenhum serviço disponível no momento. Fique ligado!</p>';
+    return;
+  }
+  servContainer.innerHTML = '<div class="itens-grid">' + servicos.map(function (it) {
+    return renderCard(it, "Quero contratar: ");
+  }).join("") + '</div>';
 }
 
 function load() {
@@ -123,6 +145,10 @@ function load() {
     .then(function (r) { return r.json(); })
     .then(function (data) { renderItens(data.itens || []); })
     .catch(function () { renderItens([]); });
+  fetch(API_BASE + "/api/servicos")
+    .then(function (r) { return r.json(); })
+    .then(function (data) { renderServicos(data.servicos || []); })
+    .catch(function () { renderServicos([]); });
 }
 
 if (document.readyState === "loading") {
