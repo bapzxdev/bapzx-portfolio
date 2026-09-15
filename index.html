@@ -72,6 +72,18 @@
     <a class="btn" href="itens.html">Ver página de Itens</a>
   </section>
 
+  <section>
+    <div class="kicker">Comunidade</div>
+    <h2>💬 Nossos Grupos</h2>
+    <p class="sub">Participe das comunidades BAPZX no WhatsApp: novidades, sorteios e negociações.</p>
+    <div id="grupos-container" class="row c4">
+      <p class="loading-msg" style="color:var(--muted);grid-column:1/-1;text-align:center">Carregando grupos...</p>
+    </div>
+    <p style="margin-top:18px" class="ident">
+      Quer entrar em um grupo? Clique no botão e participe. <a href="https://wa.me/5519991813598">Fale com a gente no WhatsApp</a> se precisar de ajuda.
+    </p>
+  </section>
+
   <section style="text-align:center">
     <div class="kicker">Pronto para comprar?</div>
     <h2>🪙 BAPZX COINS a partir de R$ 9,00</h2>
@@ -87,13 +99,54 @@
   <div class="fmini">
     <a href="https://t.me/bapzx_bot">Telegram</a>
     <a href="https://wa.me/5519991813598">WhatsApp</a>
+    <a href="https://bapzx-bot-tibia.onrender.com/privacidade" rel="noopener">Privacidade</a>
+    <a href="https://bapzx-bot-tibia.onrender.com/privacidade/pdf" rel="noopener">Privacidade (PDF)</a>
+    <a href="https://bapzx-bot-tibia.onrender.com/termos" rel="noopener">Termos</a>
+    <a href="https://bapzx-bot-tibia.onrender.com/reembolso" rel="noopener">Reembolso</a>
   </div>
-  <p style="font-size:12px">Portfólio BAPZX &middot; v3.2</p>
+  <p style="font-size:12px">Portfólio BAPZX &middot; v3.3</p>
 </footer>
 
 <script>
 const io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12});
 document.querySelectorAll(".reveal").forEach(function(el){io.observe(el)});
+</script>
+<script>
+(function () {
+  var box = document.getElementById("grupos-container");
+  function esc(s) {
+    var d = document.createElement("div");
+    d.appendChild(document.createTextNode(s == null ? "" : String(s)));
+    return d.innerHTML;
+  }
+  function render(grupos) {
+    var lista = (grupos && grupos.length) ? grupos : [];
+    if (!lista.length) {
+      box.innerHTML = '<p class="loading-msg" style="color:var(--muted);grid-column:1/-1;text-align:center">Em breve: grupos BAPZX no WhatsApp.</p>';
+      return;
+    }
+    var html = "";
+    lista.forEach(function (g) {
+      var link = (g.link || "").trim();
+      var btn = link
+        ? '<a class="btn wa btn-sm" href="' + esc(link) + '" target="_blank" rel="noopener" style="justify-content:center;width:100%">💬 Entrar no ' + esc(g.nome || "Grupo") + '</a>'
+        : '<span class="btn wa btn-sm" style="justify-content:center;width:100%;opacity:.7;cursor:default">💬 ' + esc(g.nome || "Grupo") + ' — em breve</span>';
+      html += '<div class="svc" style="display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center"><h3>' + esc(g.nome || "Grupo") + '</h3>' + btn + '</div>';
+    });
+    box.innerHTML = html;
+  }
+  function load() {
+    fetch("https://bapzx-bot-tibia.onrender.com/api/grupos")
+      .then(function (r) { return r.json(); })
+      .then(function (data) { render(data.grupos || []); })
+      .catch(function () { render([]); });
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", load);
+  } else {
+    load();
+  }
+})();
 </script>
 <script src="track.js" defer></script>
 </body>
