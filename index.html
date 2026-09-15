@@ -22,7 +22,7 @@
       <a href="itens.html">Itens</a>
       <a href="faq.html">FAQ</a>
       <a href="contato.html">Contato</a>
-      <a href="https://bapzx-bot-tibia.onrender.com/login" target="_blank" rel="noopener">Minha área</a>
+      <a href="https://bapzx-bot-tibia.onrender.com/login">Minha área</a>
     </div>
   </div>
 </nav>
@@ -129,7 +129,7 @@ document.querySelectorAll(".reveal").forEach(function(el){io.observe(el)});
     lista.forEach(function (g) {
       var link = (g.link || "").trim();
       var btn = link
-        ? '<a class="btn wa btn-sm" href="' + esc(link) + '" target="_blank" rel="noopener" style="justify-content:center;width:100%">💬 Entrar no ' + esc(g.nome || "Grupo") + '</a>'
+        ? '<a class="btn wa btn-sm" href="' + esc(link) + '" style="justify-content:center;width:100%">💬 Entrar no ' + esc(g.nome || "Grupo") + '</a>'
         : '<span class="btn wa btn-sm" style="justify-content:center;width:100%;opacity:.7;cursor:default">💬 ' + esc(g.nome || "Grupo") + ' — em breve</span>';
       html += '<div class="svc" style="display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center"><h3>' + esc(g.nome || "Grupo") + '</h3>' + btn + '</div>';
     });
