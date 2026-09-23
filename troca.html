@@ -257,30 +257,11 @@ button{font-family:inherit;cursor:pointer}
         </div>
       </section>
 
-      <section class="mk-f open">
-        <button type="button" class="mk-f lb"><span>Tipo de PvP</span><span class="mk-f-toggle"></span></button>
-        <div class="mk-f-group">
-          <button type="button" class="mk-chip" data-f="pvp" data-v="optional"><span class="mk-cn">Optional</span></button>
-          <button type="button" class="mk-chip" data-f="pvp" data-v="open"><span class="mk-cn">Open</span></button>
-          <button type="button" class="mk-chip" data-f="pvp" data-v="retro open"><span class="mk-cn">Retro Open</span></button>
-          <button type="button" class="mk-chip" data-f="pvp" data-v="hardcore"><span class="mk-cn">Hardcore</span></button>
-          <button type="button" class="mk-chip" data-f="pvp" data-v="retro hardcore"><span class="mk-cn">Retro Hardcore</span></button>
-        </div>
-      </section>
-
       <section class="mk-f">
         <button type="button" class="mk-f lb"><span>Tipo de anúncio</span><span class="mk-f-toggle"></span></button>
         <div class="mk-f-group">
           <button type="button" class="mk-chip" data-f="tipo" data-v="venda"><span class="mk-cn">Vendendo</span></button>
           <button type="button" class="mk-chip" data-f="tipo" data-v="compra"><span class="mk-cn">Comprando</span></button>
-        </div>
-      </section>
-
-      <section class="mk-f open">
-        <button type="button" class="mk-f lb"><span>Continente</span><span class="mk-f-toggle"></span></button>
-        <div class="mk-f-group">
-          <button type="button" class="mk-chip" data-f="cont" data-v="mainland"><span class="mk-cn">&#129481;&#8205;&#9794;&#65039; Mainland</span></button>
-          <button type="button" class="mk-chip" data-f="cont" data-v="rookgaard"><span class="mk-cn">&#128004; Rookgaard</span></button>
         </div>
       </section>
 
@@ -484,7 +465,7 @@ function applyFilters(list) {
     if (hideOffers && a.aceita_ofertas) continue;
     if (world && (a.world || "").toLowerCase().trim() !== world) continue;
 
-    for (const k of ["battleye", "pvp", "tipo", "cont", "icat", "voc"]) {
+    for (const k of ["battleye", "tipo", "icat", "voc"]) {
       const v = STATE[k];
       if (!v) continue;
       const av = String((a[k] != null ? a[k] : "")).toLowerCase().trim();
