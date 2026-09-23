@@ -106,8 +106,10 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
   background:var(--panel);border:1px solid var(--border);border-radius:16px;
   padding:14px 14px 16px;display:flex;flex-direction:column;align-items:center;text-align:center;
   transition:border-color .15s,transform .12s;min-width:0;position:relative;
+  color:var(--text);text-decoration:none;cursor:pointer;
 }
-.mk-card:hover{border-color:var(--border-2);transform:translateY(-2px)}
+.mk-card:focus-visible{outline:2px solid var(--purple);outline-offset:2px;border-radius:16px}
+.mk-card:hover{border-color:var(--border-2);transform:translateY(-2px);text-decoration:none}
 .mk-card.vip{border-color:rgba(251,191,36,.45);background:linear-gradient(150deg,rgba(251,191,36,.08),var(--panel) 55%)}
 .mk-card.vip .mk-top{border-bottom:1px dashed rgba(251,191,36,.28)}
 .mk-badge-vip{
@@ -339,6 +341,7 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 
 <script>
 const API_BASE = "https://bapzx-bot-tibia.onrender.com";
+const STORAGE_KEY = "marktrade-filtros";
 const grid = document.getElementById("mk-grid");
 const countEl = document.getElementById("mk-count");
 const side = document.getElementById("mk-side");
@@ -346,6 +349,30 @@ const sidebarBtn = document.getElementById("mk-filters-btn");
 
 let ALL = [];
 let STATE = {};
+
+function saveState() {
+  try {
+    const dados = Object.assign({}, STATE);
+    dados.world = document.getElementById("mk-world").value;
+    dados.tierSel = document.getElementById("mk-tier").value;
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(dados));
+  } catch (e) { /* sessão indisponível */ }
+}
+
+function restoreState() {
+  try {
+    const raw = sessionStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const dados = JSON.parse(raw);
+    if (typeof dados !== "object" || dados === null) return;
+    STATE = {};
+    for (const k of ["cat", "hideOffers", "tipo", "icat", "voc", "tier", "world"]) {
+      if (dados[k] !== undefined && dados[k] !== null) STATE[k] = dados[k];
+    }
+    if (dados.world !== undefined) document.getElementById("mk-world").value = dados.world;
+    if (dados.tierSel !== undefined) document.getElementById("mk-tier").value = dados.tierSel;
+  } catch (e) { /* ignorar estado corrompido */ }
+}
 
 function esc(s) {
   var d = document.createElement("div");
@@ -435,7 +462,7 @@ function renderCard(a) {
   const catHtml = a.categoria ? '<span class="mk-cat-chip">' + esc(a.categoria) + '</span>' : '';
   const contactHtml = a.contato ? '<span class="mk-contact">' + esc(a.contato) + '</span>' : '';
 
-  return '<div class="mk-card' + (a.is_destaque ? ' vip' : '') + '">'
+  return '<a class="mk-card' + (a.is_destaque ? ' vip' : '') + '" href="anuncio.html?id=' + encodeURIComponent(a.id) + '" aria-label="Ver detalhes do anúncio de ' + esc(nome) + '">'
     + vipBadge
     + '<div class="mk-top">'
     + '<span class="mk-type ' + tipoCls + '">' + tipoLbl + '</span>'
@@ -448,7 +475,7 @@ function renderCard(a) {
     + serverHtml
     + '<span class="mk-user">' + avatarHtml + '<span class="mk-uname">' + esc(a.jogador || "Anônimo") + '</span>' + checkHtml + '</span>'
     + (contactHtml ? '<div class="mk-contact-row">' + contactHtml + '</div>' : '')
-    + '</div>';
+    + '</a>';
 }
 
 function applyFilters(list) {
@@ -554,6 +581,7 @@ function setFilter(field, value) {
   }
   syncChips();
   render();
+  saveState();
 }
 
 function resetFilters() {
@@ -562,6 +590,7 @@ function resetFilters() {
   document.getElementById("mk-tier").value = "";
   syncChips();
   render();
+  saveState();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -576,6 +605,7 @@ document.addEventListener("DOMContentLoaded", function () {
     STATE.hideOffers = !STATE.hideOffers;
     syncChips();
     render();
+    saveState();
   });
   document.getElementById("mk-hide-offers").addEventListener("keydown", function (e) {
     if (e.key === "Enter" || e.key === " ") { e.preventDefault(); this.click(); }
@@ -584,10 +614,12 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("mk-world").addEventListener("change", function () {
     STATE.world = this.value;
     render();
+    saveState();
   });
   document.getElementById("mk-tier").addEventListener("change", function () {
     STATE.tier = this.value;
     render();
+    saveState();
   });
   document.getElementById("mk-clear").addEventListener("click", resetFilters);
 
@@ -606,6 +638,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  restoreState();
+  syncChips();
   load();
 });
 </script>
