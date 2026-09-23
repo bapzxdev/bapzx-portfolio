@@ -148,6 +148,11 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 .mk-ava img{width:22px;height:22px;border-radius:50%;object-fit:cover;display:block}
 .mk-uname{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:150px}
 .mk-check{color:var(--green);font-weight:900;font-size:12px;flex-shrink:0}
+.mk-cats{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.mk-cat-chip{display:inline-flex;align-items:center;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.35);color:var(--purple);font-size:10.5px;font-weight:700;border-radius:999px;padding:2px 10px}
+.mk-contact-row{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:10px;width:100%}
+.mk-contact{display:inline-flex;align-items:center;gap:6px;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.3);color:var(--green);font-size:12px;font-weight:700;border-radius:999px;padding:4px 12px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-break:break-all}
+.mk-contact::before{content:"\1F4E7";font-size:12px;line-height:1;flex-shrink:0}
 
 /* ============ MOBILE FILTERS ============ */
 .mk-filters-btn{display:none}
@@ -427,6 +432,9 @@ function renderCard(a) {
   const checkHtml = a.verificado ? '<span class="mk-check" title="Verificado">&#10004;</span>' : '';
   const vipBadge = a.is_destaque ? '<span class="mk-badge-vip" title="Destaque VIP">&#11088; VIP</span>' : '';
 
+  const catHtml = a.categoria ? '<span class="mk-cat-chip">' + esc(a.categoria) + '</span>' : '';
+  const contactHtml = a.contato ? '<span class="mk-contact">' + esc(a.contato) + '</span>' : '';
+
   return '<div class="mk-card' + (a.is_destaque ? ' vip' : '') + '">'
     + vipBadge
     + '<div class="mk-top">'
@@ -434,10 +442,12 @@ function renderCard(a) {
     + dateHtml
     + '</div>'
     + '<div class="mk-name">' + esc(nome) + '</div>'
+    + (catHtml ? '<div class="mk-cats">' + catHtml + '</div>' : '')
     + '<div class="mk-sprite">' + spriteHtml + '</div>'
     + priceHtml
     + serverHtml
     + '<span class="mk-user">' + avatarHtml + '<span class="mk-uname">' + esc(a.jogador || "Anônimo") + '</span>' + checkHtml + '</span>'
+    + (contactHtml ? '<div class="mk-contact-row">' + contactHtml + '</div>' : '')
     + '</div>';
 }
 
@@ -461,7 +471,7 @@ function applyFilters(list) {
     for (const k of ["tipo", "icat", "voc"]) {
       const v = STATE[k];
       if (!v) continue;
-      const av = String((a[k] != null ? a[k] : "")).toLowerCase().trim();
+      const av = String((k === "icat" ? (a.categoria != null ? a.categoria : "") : (a[k] != null ? a[k] : ""))).toLowerCase().trim();
       if (!av || av !== String(v).toLowerCase().trim()) continue outer;
     }
 
