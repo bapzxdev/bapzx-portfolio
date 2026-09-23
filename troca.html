@@ -7,66 +7,168 @@
 <meta name="description" content="MARKTRADE BAPZX: marketplace de troca de itens do Tibia. Venda, compra e negociação entre jogadores.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="styles.css" rel="stylesheet">
 <style>
-body{background:#f7f8f9;color:#111827}
-.mk-wrap{max-width:1180px;margin:0 auto;padding:0 20px}
-.mk-hero{text-align:center;padding:38px 22px 10px}
-.mk-hero h1{font-family:'Sora',sans-serif;font-size:34px;color:#111827;margin:0 0 6px;letter-spacing:.5px}
-.mk-hero h1 span{background:linear-gradient(135deg,#dc2626,#e11d48);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.mk-hero p{color:#6b7280;font-size:15px;margin:0}
-.mk-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:26px 0 6px}
-.mk-toolbar h2{font-size:18px;color:#111827;margin:0}
-.mk-count{font-size:13px;color:#6b7280;font-weight:600;background:#fff;border:1px solid #e2e5e8;border-radius:999px;padding:5px 12px}
-.mk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;margin:18px 0 40px}
-.mk-empty{grid-column:1/-1;text-align:center;background:#fff;border:1px dashed #d1d5db;border-radius:20px;padding:46px 20px;color:#6b7280;font-size:15px}
-.mk-loading{grid-column:1/-1;text-align:center;color:#6b7280;padding:40px 0;font-size:15px}
+:root{
+  --bg:#0b0f1a; --panel:#111a2c; --panel-2:#18233a; --border:#22304a; --border-2:#2c3d5e;
+  --text:#e6edf7; --muted:#8ea0b8; --green:#4ade80; --purple:#a78bfa; --blue:#60a5fa;
+  --amber:#fbbf24; --red:#f87171;
+  --grad:linear-gradient(135deg,#34d399 0%,#4ade80 35%,#60a5fa 100%);
+  --grad-vip:linear-gradient(135deg,#f59e0b 0%,#fbbf24 50%,#f87171 100%);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',Arial,sans-serif;color:var(--text);min-height:100vh;line-height:1.5;
+  background:radial-gradient(1100px 520px at 85% -10%, rgba(124,58,237,.14), transparent 60%),
+             radial-gradient(900px 460px at -10% 0%, rgba(52,211,153,.10), transparent 55%),
+             var(--bg);
+  overflow-x:hidden;
+}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--purple);outline-offset:2px;border-radius:8px}
+button{font-family:inherit;cursor:pointer}
+
+/* ============ LAYOUT ============ */
+.mk-wrap{max-width:1180px;margin:0 auto;padding:20px 20px 40px}
+.mk-hero{text-align:center;padding:30px 22px 6px}
+.mk-hero h1{font-family:'Sora',sans-serif;font-size:34px;color:#fff;margin:0 0 6px;letter-spacing:.5px}
+.mk-hero h1 span{background:linear-gradient(135deg,#f59e0b,#f87171);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.mk-hero p{color:var(--muted);font-size:15px;margin:0}
+.mk-body{display:grid;grid-template-columns:270px 1fr;gap:22px;align-items:start;margin-top:26px}
+@media (max-width:900px){.mk-body{grid-template-columns:1fr}}
+
+/* ============ SIDEBAR FILTROS ============ */
+.mk-side{
+  position:sticky;top:84px;background:var(--panel);border:1px solid var(--border);
+  border-radius:16px;padding:18px 16px;max-height:calc(100vh - 100px);overflow:auto;
+}
+.mk-side-hd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.mk-side-hd h2{font-family:'Sora',sans-serif;font-size:15px;color:#fff;margin:0;display:flex;align-items:center;gap:8px}
+.mk-clear{
+  background:transparent;border:1px solid var(--border-2);color:var(--muted);border-radius:8px;
+  font-size:12px;font-weight:600;padding:5px 10px;transition:.15s;
+}
+.mk-clear:hover{color:var(--red);border-color:rgba(248,113,113,.5)}
+.mk-f{display:block;width:100%;border:0;border-top:1px solid var(--border);padding:12px 0;text-align:left}
+.mk-f.lb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);font-weight:600}
+.mk-f.lb .mk-f-toggle{margin-left:auto}
+.mk-f-toggle{
+  width:26px;height:15px;border-radius:999px;background:var(--border-2);position:relative;flex-shrink:0;transition:.2s;border:0;
+}
+.mk-f-toggle::after{content:"";position:absolute;top:2px;left:2px;width:11px;height:11px;border-radius:50%;background:#9db0cc;transition:.2s}
+.mk-f-toggle.on{background:rgba(74,222,128,.35)}
+.mk-f-toggle.on::after{left:13px;background:var(--green)}
+.mk-f-title{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:600}
+.mk-f-group{display:none;flex-direction:column;gap:4px;padding-top:10px}
+.mk-f.open .mk-f-group{display:flex}
+.mk-chip{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;
+  background:transparent;border:0;color:var(--muted);font-size:13px;padding:5px 8px;border-radius:8px;transition:.15s;text-align:left;
+}
+.mk-chip:hover{color:var(--text);background:rgba(96,165,250,.08)}
+.mk-chip.on{color:#fff;background:rgba(96,165,250,.14)}
+.mk-chip .mk-cn{font-weight:600}
+.mk-chip .mk-cc{font-size:11px;color:var(--muted);font-weight:700;background:var(--panel-2);border-radius:999px;padding:1px 8px}
+.mk-chip.on .mk-cc{color:var(--green);background:rgba(74,222,128,.14)}
+.mk-select{width:100%;margin-top:8px;padding:8px 10px;border:1px solid var(--border-2);border-radius:9px;background:var(--bg);color:var(--text);font-size:13px}
+.mk-row{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+
+/* ============ CONTEÚDO / TOOLBAR ============ */
+.mk-main{min-width:0}
+.mk-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.mk-toolbar h2{font-size:18px;color:#fff;margin:0;font-family:'Sora',sans-serif;display:flex;align-items:center;gap:8px}
+.mk-count{font-size:12.5px;color:var(--muted);font-weight:600;background:var(--panel);border:1px solid var(--border);border-radius:999px;padding:5px 12px}
+.mk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;margin:16px 0 36px}
+.mk-empty{
+  grid-column:1/-1;text-align:center;background:var(--panel);border:1px dashed var(--border-2);
+  border-radius:16px;padding:42px 20px;color:var(--muted);font-size:14px;
+}
+.mk-loading{grid-column:1/-1;text-align:center;color:var(--muted);padding:40px 0;font-size:14px}
+.mk-loading .spinner{display:inline-block;width:22px;height:22px;border:3px solid var(--border-2);border-top-color:var(--green);border-radius:50%;animation:mk-spin .8s linear infinite;vertical-align:-5px;margin-right:8px}
+@keyframes mk-spin{to{transform:rotate(360deg)}}
+.mk-note{grid-column:1/-1;text-align:center;color:var(--muted);font-size:12.5px}
+.mk-vip-hd{
+  display:flex;align-items:center;gap:8px;font-family:'Sora',sans-serif;font-size:15px;color:#fbbf24;
+  background:linear-gradient(120deg,rgba(251,191,36,.12),rgba(248,113,113,.08)),var(--panel);
+  border:1px solid rgba(251,191,36,.3);border-radius:12px;padding:12px 16px;margin-top:20px;
+}
+.mk-vip-hd[hidden]{display:none}
+
 /* ============ CARD DE ANÚNCIO ============ */
 .mk-card{
-  background:#f1f3f3;border:1px solid #d8dde1;border-radius:20px;
+  background:var(--panel);border:1px solid var(--border);border-radius:16px;
   padding:14px 14px 16px;display:flex;flex-direction:column;align-items:center;text-align:center;
-  transition:border-color .15s,transform .12s;min-width:0;
+  transition:border-color .15s,transform .12s;min-width:0;position:relative;
 }
-.mk-card:hover{border-color:#b8c0c7;transform:translateY(-2px)}
-/* 1ª linha: tipo + data */
+.mk-card:hover{border-color:var(--border-2);transform:translateY(-2px)}
+.mk-card.vip{border-color:rgba(251,191,36,.45);background:linear-gradient(150deg,rgba(251,191,36,.08),var(--panel) 55%)}
+.mk-card.vip .mk-badge-vip{
+  position:absolute;top:10px;right:10px;display:inline-flex;align-items:center;gap:4px;
+  font-size:10.5px;font-weight:800;letter-spacing:.3px;color:#7c2d12;
+  background:var(--grad-vip);border-radius:999px;padding:3px 9px;
+  box-shadow:0 4px 14px rgba(251,191,36,.35);
+}
 .mk-top{width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px}
-.mk-type{display:inline-flex;align-items:center;border-radius:999px;padding:3px 11px;font-size:11.5px;font-weight:800;color:#111;border:1px solid;letter-spacing:.2px;white-space:nowrap}
-.mk-type.venda{background:#fde3e3;border-color:#f3b8b8}
-.mk-type.compra{background:#dbeafe;border-color:#b3d0f5}
-.mk-type.outro{background:#e5e7eb;border-color:#d1d5db}
-.mk-date{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#111;font-weight:600;white-space:nowrap}
+.mk-type{display:inline-flex;align-items:center;border-radius:999px;padding:3px 11px;font-size:11.5px;font-weight:800;border:1px solid;letter-spacing:.2px;white-space:nowrap}
+.mk-type.venda{background:rgba(74,222,128,.12);border-color:rgba(74,222,128,.35);color:var(--green)}
+.mk-type.compra{background:rgba(96,165,250,.12);border-color:rgba(96,165,250,.35);color:var(--blue)}
+.mk-type.outro{background:rgba(167,139,250,.14);border-color:rgba(167,139,250,.4);color:var(--purple)}
+.mk-date{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);font-weight:600;white-space:nowrap}
 .mk-date svg{display:block;flex-shrink:0;opacity:.75}
-/* nome do item */
-.mk-name{font-size:20px;font-weight:800;color:#111;line-height:1.2;margin:18px 6px 2px;word-wrap:break-word;overflow-wrap:anywhere;max-width:100%}
-/* sprite */
-.mk-sprite{width:100%;display:flex;align-items:center;justify-content:center;margin:16px 0}
-.mk-sprite img{width:auto;height:80px;max-width:100%;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 2px 3px rgba(17,24,39,.12))}
-.mk-sprite .mk-ph{width:80px;height:80px;border-radius:18px;background:#fff;border:1px dashed #ccd3d9;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:28px;font-weight:800;color:#9aa3ac}
-/* preço / ofertas */
-.mk-price{font-size:16px;font-weight:800;color:#111;margin:8px 0 12px;line-height:1.2}
-.mk-offers{font-size:14.5px;font-weight:800;color:#111;margin:8px 0 12px;line-height:1.2}
-/* servidor */
-.mk-server{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border-radius:999px;border:1px solid;font-size:13px;line-height:1;margin:0 0 14px}
-.mk-server b{color:#111;font-weight:700;white-space:nowrap}
-.mk-server.green{background:#e8f8ec;border-color:#bfe8c9}
-.mk-server.amber{background:#fdf3d7;border-color:#f2e0a0}
-.mk-server.blue{background:#e8f1fc;border-color:#c8dcf5}
-.mk-server.purple{background:#f3edfb;border-color:#ddd0f2}
-.mk-server.slate{background:#eceff2;border-color:#d5dae0}
-/* usuário */
-.mk-user{display:inline-flex;align-items:center;gap:7px;background:#e8eaec;border:1px solid #d3d8dd;border-radius:999px;padding:3px 12px 3px 4px;font-size:12.5px;color:#111;max-width:100%}
-.mk-ava{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#4ade80,#60a5fa);color:#04281a;font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mk-name{font-size:20px;font-weight:800;color:#fff;line-height:1.2;margin:18px 6px 2px;word-wrap:break-word;overflow-wrap:anywhere;max-width:100%}
+.mk-sprite{width:100%;display:flex;align-items:center;justify-content:center;margin:14px 0}
+.mk-sprite img{width:auto;height:78px;max-width:100%;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 3px 8px rgba(0,0,0,.45))}
+.mk-sprite .mk-ph{width:74px;height:74px;border-radius:14px;background:var(--panel-2);border:1px dashed var(--border-2);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:26px;font-weight:800;color:#5b6b82}
+.mk-price{font-size:17px;font-weight:800;color:#fff;margin:8px 0 12px;line-height:1.2;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.mk-offers{font-size:14px;font-weight:800;color:var(--amber);margin:8px 0 12px;line-height:1.2}
+.mk-server{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 11px;border-radius:999px;border:1px solid;font-size:13px;line-height:1;margin:0 0 14px}
+.mk-server b{font-weight:700;white-space:nowrap}
+.mk-server.green{background:rgba(74,222,128,.12);border-color:rgba(74,222,128,.35)}
+.mk-server.green b{color:var(--green)}
+.mk-server.amber{background:rgba(251,191,36,.12);border-color:rgba(251,191,36,.35)}
+.mk-server.amber b{color:var(--amber)}
+.mk-server.blue{background:rgba(96,165,250,.12);border-color:rgba(96,165,250,.35)}
+.mk-server.blue b{color:var(--blue)}
+.mk-server.purple{background:rgba(167,139,250,.14);border-color:rgba(167,139,250,.4)}
+.mk-server.purple b{color:var(--purple)}
+.mk-server.slate{background:rgba(142,160,184,.12);border-color:rgba(142,160,184,.35)}
+.mk-server.slate b{color:var(--muted)}
+.mk-user{display:inline-flex;align-items:center;gap:7px;background:var(--panel-2);border:1px solid var(--border-2);border-radius:999px;padding:3px 12px 3px 4px;font-size:12.5px;max-width:100%}
+.mk-ava{width:22px;height:22px;border-radius:50%;background:var(--grad);color:#04281a;font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .mk-ava img{width:22px;height:22px;border-radius:50%;object-fit:cover;display:block}
 .mk-uname{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:150px}
-.mk-check{color:#16a34a;font-weight:900;font-size:12px;flex-shrink:0}
+.mk-check{color:var(--green);font-weight:900;font-size:12px;flex-shrink:0}
+
+/* ============ MOBILE FILTERS ============ */
+.mk-filters-btn{display:none}
+@media (max-width:900px){
+  .mk-filters-btn{
+    display:inline-flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--border);
+    color:var(--text);font-size:13px;font-weight:700;border-radius:10px;padding:9px 14px;margin-bottom:12px;
+  }
+  .mk-side{position:fixed;top:64px;left:0;right:0;bottom:0;z-index:60;border-radius:0;max-height:none;
+    transform:translateX(-105%);transition:transform .25s ease;border-top:1px solid var(--border)}
+  .mk-side.open{transform:none}
+  .mk-side-close{
+    display:inline-flex;margin-left:auto;background:transparent;border:1px solid var(--border-2);
+    color:var(--muted);border-radius:8px;padding:4px 10px;font-size:12px;
+  }
+  .mk-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+}
+.mk-side-close{display:none}
 @media (max-width:640px){
   .mk-hero h1{font-size:27px}
-  .mk-grid{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+  .mk-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .mk-name{font-size:16px}
+  .mk-sprite img{height:60px}
 }
 @media (max-width:400px){
-  .mk-grid{grid-template-columns:1fr}
+  .mk-grid{grid-template-columns:1fr 1fr}
 }
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
@@ -91,12 +193,155 @@ body{background:#f7f8f9;color:#111827}
     <p>Anúncios de troca de itens entre jogadores — venda, compra e negociação.</p>
   </header>
 
-  <div class="mk-toolbar">
-    <h2>Anúncios recentes</h2>
-    <span class="mk-count" id="mk-count">Carregando…</span>
-  </div>
-  <div class="mk-grid" id="mk-grid">
-    <p class="mk-loading">Carregando anúncios...</p>
+  <button class="mk-filters-btn" id="mk-filters-btn" aria-expanded="false">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+    Filtros
+  </button>
+
+  <div class="mk-body">
+
+    <!-- ============ MENU LATERAL DE FILTROS ============ -->
+    <aside class="mk-side" id="mk-side" aria-label="Filtros dos anúncios">
+      <div class="mk-side-hd">
+        <h2>&#128269; Filtros</h2>
+        <button class="mk-clear" id="mk-clear" type="button">Limpar filtros</button>
+        <button class="mk-side-close" id="mk-side-close" type="button" aria-label="Fechar filtros">&#10005;</button>
+      </div>
+
+      <section class="mk-f open">
+        <div class="mk-f-title">Categoria</div>
+        <div class="mk-f-group">
+          <button type="button" class="mk-chip" data-f="cat" data-v="item"><span class="mk-cn">&#128737; Item</span></button>
+          <button type="button" class="mk-chip" data-f="cat" data-v="house"><span class="mk-cn">&#127969; House</span></button>
+        </div>
+      </section>
+
+      <section class="mk-f">
+        <button type="button" class="mk-f lb">
+          <span>&#128176;</span><span>Ocultar anúncios com "aceito ofertas"</span>
+          <span class="mk-f-toggle" role="switch" aria-checked="false" tabindex="0"></span>
+        </button>
+      </section>
+
+      <section class="mk-f open">
+        <button type="button" class="mk-f lb"><span>&#127758;</span><span>Mundo</span><span class="mk-f-toggle"></span></button>
+        <div class="mk-f-group">
+          <label><span class="mk-cn"></span>
+          <select class="mk-select" id="mk-world" aria-label="Selecionar mundo">
+            <option value="">Todos os mundos</option>
+            <option value="auroria">Auroria</option>
+            <option value="belaria">Belaria</option>
+            <option value="bellum">Bellum</option>
+            <option value="drakaria">Drakaria</option>
+            <option value="eldrian">Eldrian</option>
+            <option value="elysian">Elysian</option>
+            <option value="infernum i">Infernum I</option>
+            <option value="infernum ii">Infernum II</option>
+            <option value="infernum iii">Infernum III</option>
+            <option value="lunarian">Lunarian</option>
+            <option value="malveria">Malveria</option>
+            <option value="mystian">Mystian</option>
+            <option value="obsidian">Obsidian</option>
+            <option value="solarian">Solarian</option>
+            <option value="tenebrium">Tenebrium</option>
+            <option value="vesperia">Vesperia</option>
+          </select></label>
+        </div>
+      </section>
+
+      <section class="mk-f">
+        <button type="button" class="mk-f lb"><span>BattlEye</span><span class="mk-f-toggle"></span></button>
+        <div class="mk-f-group">
+          <button type="button" class="mk-chip" data-f="battleye" data-v="yellow"><span class="mk-cn">&#128993; Yellow</span></button>
+          <button type="button" class="mk-chip" data-f="battleye" data-v="green"><span class="mk-cn">&#128994; Green</span></button>
+        </div>
+      </section>
+
+      <section class="mk-f open">
+        <button type="button" class="mk-f lb"><span>Tipo de PvP</span><span class="mk-f-toggle"></span></button>
+        <div class="mk-f-group">
+          <button type="button" class="mk-chip" data-f="pvp" data-v="optional"><span class="mk-cn">Optional</span></button>
+          <button type="button" class="mk-chip" data-f="pvp" data-v="open"><span class="mk-cn">Open</span></button>
+          <button type="button" class="mk-chip" data-f="pvp" data-v="retro open"><span class="mk-cn">Retro Open</span></button>
+          <button type="button" class="mk-chip" data-f="pvp" data-v="hardcore"><span class="mk-cn">Hardcore</span></button>
+          <button type="button" class="mk-chip" data-f="pvp" data-v="retro hardcore"><span class="mk-cn">Retro Hardcore</span></button>
+        </div>
+      </section>
+
+      <section class="mk-f">
+        <button type="button" class="mk-f lb"><span>Tipo de anúncio</span><span class="mk-f-toggle"></span></button>
+        <div class="mk-f-group">
+          <button type="button" class="mk-chip" data-f="tipo" data-v="venda"><span class="mk-cn">Vendendo</span></button>
+          <button type="button" class="mk-chip" data-f="tipo" data-v="compra"><span class="mk-cn">Comprando</span></button>
+        </div>
+      </section>
+
+      <section class="mk-f open">
+        <button type="button" class="mk-f lb"><span>Continente</span><span class="mk-f-toggle"></span></button>
+        <div class="mk-f-group">
+          <button type="button" class="mk-chip" data-f="cont" data-v="mainland"><span class="mk-cn">&#129481;&#8205;&#9794;&#65039; Mainland</span></button>
+          <button type="button" class="mk-chip" data-f="cont" data-v="rookgaard"><span class="mk-cn">&#128004; Rookgaard</span></button>
+        </div>
+      </section>
+
+      <section class="mk-f">
+        <button type="button" class="mk-f lb"><span>Categoria do item</span><span class="mk-f-toggle"></span></button>
+        <div class="mk-f-group">
+          <button type="button" class="mk-chip" data-f="icat" data-v="soul core"><span class="mk-cn">&#128156; Soul Core</span></button>
+          <button type="button" class="mk-chip" data-f="icat" data-v="make believe"><span class="mk-cn">&#127912; Make Believe</span></button>
+          <button type="button" class="mk-chip" data-f="icat" data-v="rares"><span class="mk-cn">&#128142; Rares</span></button>
+          <button type="button" class="mk-chip" data-f="icat" data-v="primal ordeal"><span class="mk-cn">&#129424; Primal Ordeal</span></button>
+          <button type="button" class="mk-chip" data-f="icat" data-v="fansite"><span class="mk-cn">&#127807; Fansite</span></button>
+          <button type="button" class="mk-chip" data-f="icat" data-v="soul war"><span class="mk-cn">&#128128; Soul War</span></button>
+          <button type="button" class="mk-chip" data-f="icat" data-v="rotten blood"><span class="mk-cn">&#129656; Rotten Blood</span></button>
+        </div>
+      </section>
+
+      <section class="mk-f open">
+        <button type="button" class="mk-f lb"><span>Vocação</span><span class="mk-f-toggle"></span></button>
+        <div class="mk-f-group">
+          <button type="button" class="mk-chip" data-f="voc" data-v="knight"><span class="mk-cn">Knight</span></button>
+          <button type="button" class="mk-chip" data-f="voc" data-v="paladin"><span class="mk-cn">Paladin</span></button>
+          <button type="button" class="mk-chip" data-f="voc" data-v="sorcerer"><span class="mk-cn">Sorcerer</span></button>
+          <button type="button" class="mk-chip" data-f="voc" data-v="druid"><span class="mk-cn">Druid</span></button>
+          <button type="button" class="mk-chip" data-f="voc" data-v="monk"><span class="mk-cn">Monk</span></button>
+        </div>
+      </section>
+
+      <section class="mk-f open">
+        <button type="button" class="mk-f lb"><span>Tier</span><span class="mk-f-toggle"></span></button>
+        <div class="mk-f-group">
+          <label><span class="mk-cn"></span>
+          <select class="mk-select" id="mk-tier" aria-label="Tier do item">
+            <option value="">Todos os tiers</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select></label>
+        </div>
+      </section>
+    </aside>
+
+    <!-- ============ ANÚNCIOS ============ -->
+    <div class="mk-main">
+      <div class="mk-toolbar">
+        <h2>Anúncios recentes</h2>
+        <span class="mk-count" id="mk-count">Carregando…</span>
+      </div>
+
+      <div class="mk-vip-hd" id="mk-vip-hd" hidden>&#11088; Destaques (VIP)</div>
+      <div class="mk-grid" id="mk-grid" aria-live="polite">
+        <p class="mk-loading"><span class="spinner" aria-hidden="true"></span> Carregando anúncios...</p>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -118,6 +363,12 @@ body{background:#f7f8f9;color:#111827}
 const API_BASE = "https://bapzx-bot-tibia.onrender.com";
 const grid = document.getElementById("mk-grid");
 const countEl = document.getElementById("mk-count");
+const vipHd = document.getElementById("mk-vip-hd");
+const side = document.getElementById("mk-side");
+const sidebarBtn = document.getElementById("mk-filters-btn");
+
+let ALL = [];
+let STATE = {};
 
 function esc(s) {
   var d = document.createElement("div");
@@ -126,22 +377,10 @@ function esc(s) {
 }
 
 const SERVER_COLORS = {
-  "auroria": "purple",
-  "belaria": "amber",
-  "bellum": "slate",
-  "drakaria": "blue",
-  "eldrian": "purple",
-  "elysian": "green",
-  "infernum i": "blue",
-  "infernum ii": "blue",
-  "infernum iii": "blue",
-  "lunarian": "purple",
-  "malveria": "amber",
-  "mystian": "purple",
-  "obsidian": "slate",
-  "solarian": "green",
-  "tenebrium": "slate",
-  "vesperia": "slate",
+  "auroria":"purple","belaria":"amber","bellum":"slate","drakaria":"blue",
+  "eldrian":"purple","elysian":"green","infernum i":"blue","infernum ii":"blue",
+  "infernum iii":"blue","lunarian":"purple","malveria":"amber","mystian":"purple",
+  "obsidian":"slate","solarian":"green","tenebrium":"slate","vesperia":"slate",
 };
 
 function serverColor(world) {
@@ -167,7 +406,7 @@ function formatDateTime(iso) {
     if (isNaN(d.getTime())) return esc(String(iso));
     const pad = function (x) { return (x < 10 ? "0" : "") + x; };
     return pad(d.getDate()) + "/" + pad(d.getMonth() + 1) + "/" + d.getFullYear()
-      + ", " + pad(d.getHours()) + ":" + pad(d.getMinutes()) + ":" + pad(d.getSeconds());
+      + ", " + pad(d.getHours()) + ":" + pad(d.getMinutes());
   } catch (e) {
     return esc(String(iso));
   }
@@ -211,9 +450,11 @@ function renderCard(a) {
     + '</div>' : '');
 
   const avatarHtml = '<span class="mk-ava">' + esc(initials(a.jogador)) + '</span>';
-  const checkHtml = a.verificado ? '<span class="mk-check" title="Verificado">✓</span>' : '';
+  const checkHtml = a.verificado ? '<span class="mk-check" title="Verificado">&#10004;</span>' : '';
+  const vipBadge = a.is_destaque ? '<span class="mk-badge-vip" title="Destaque VIP">&#11088; VIP</span>' : '';
 
-  return '<div class="mk-card">'
+  return '<div class="mk-card' + (a.is_destaque ? ' vip' : '') + '">'
+    + vipBadge
     + '<div class="mk-top">'
     + '<span class="mk-type ' + tipoCls + '">' + tipoLbl + '</span>'
     + dateHtml
@@ -226,28 +467,194 @@ function renderCard(a) {
     + '</div>';
 }
 
-function render(data) {
-  const anuncios = (data && data.anuncios && data.anuncios.length) ? data.anuncios : [];
-  countEl.textContent = anuncios.length === 1 ? "1 anúncio ativo" : (anuncios.length + " anúncios ativos");
-  if (!anuncios.length) {
+function applyFilters(list) {
+  const matches = [];
+  const cat = STATE.cat;
+  const hideOffers = !!STATE.hideOffers;
+  const world = (STATE.world || "").toLowerCase().trim();
+  const tierRaw = STATE.tier;
+  const tier = tierRaw === "" || tierRaw == null ? null : String(tierRaw);
+
+  outer:
+  for (let i = 0; i < list.length; i++) {
+    const a = list[i];
+    const nome = (a.nome || "").toLowerCase();
+    const desc = (a.descricao || "").toLowerCase();
+    if (cat === "house" && !/house|guildhall|flat|apartment/.test(nome + " " + desc)) continue;
+    if (hideOffers && a.aceita_ofertas) continue;
+    if (world && (a.world || "").toLowerCase().trim() !== world) continue;
+
+    for (const k of ["battleye", "pvp", "tipo", "cont", "icat", "voc"]) {
+      const v = STATE[k];
+      if (!v) continue;
+      const av = String((a[k] != null ? a[k] : "")).toLowerCase().trim();
+      if (!av || av !== String(v).toLowerCase().trim()) continue outer;
+    }
+
+    if (tier !== null && String(a.tier != null ? a.tier : "").replace(/\.0$/,"") !== tier) continue;
+    matches.push(a);
+  }
+  return matches;
+}
+
+function render() {
+  const tudo = applyFilters(ALL);
+  const vips = tudo.filter(function (a) { return a.is_destaque; });
+  const normais = tudo.filter(function (a) { return !a.is_destaque; });
+
+  countEl.textContent = ALL.length === 1 ? "1 anúncio ativo" : (ALL.length + " anúncios ativos");
+  if (!ALL.length) {
+    vipHd.hidden = true;
     grid.innerHTML = '<div class="mk-empty">Nenhum anúncio ativo no momento.<br>Volte em breve para ver novas trocas!</div>';
     return;
   }
-  grid.innerHTML = anuncios.map(renderCard).join("");
+
+  const aplicouFiltro = applyFilters(ALL).length !== ALL.length;
+  if (aplicouFiltro && !tudo.length) {
+    vipHd.hidden = true;
+    grid.innerHTML = '<div class="mk-empty">Nenhum anúncio corresponde aos filtros selecionados.<br><button class="mk-clear" id="mk-clear-inline" type="button" style="margin-top:14px">Limpar filtros</button></div>';
+    const btn = document.getElementById("mk-clear-inline");
+    if (btn) btn.addEventListener("click", function () { resetFilters(); });
+    return;
+  }
+
+  if (!vips.length) {
+    vipHd.hidden = true;
+    grid.innerHTML = normais.map(renderCard).join("");
+    return;
+  }
+
+  vipHd.hidden = false;
+  grid.innerHTML = vips.map(renderCard).join("")
+    + '<div class="mk-note" style="grid-column:1/-1">— Anúncios recentes —</div>'
+    + normais.map(renderCard).join("");
+}
+
+function showError() {
+  vipHd.hidden = true;
+  countEl.textContent = "Offline";
+  grid.innerHTML = '<div class="mk-empty">Não foi possível carregar os anúncios.<br><button class="mk-clear" id="mk-retry" type="button" style="margin-top:14px">Tentar novamente</button></div>';
+  const btn = document.getElementById("mk-retry");
+  if (btn) btn.addEventListener("click", load);
 }
 
 function load() {
+  grid.innerHTML = '<p class="mk-loading"><span class="spinner" aria-hidden="true"></span> Carregando anúncios...</p>';
   fetch(API_BASE + "/api/troca")
-    .then(function (r) { return r.json(); })
-    .then(function (data) { render(data); })
-    .catch(function () { render({ anuncios: [] }); });
+    .then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    })
+    .then(function (data) {
+      ALL = (data && data.anuncios && data.anuncios.length) ? data.anuncios : [];
+      render();
+    })
+    .catch(function () { showError(); });
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", load);
-} else {
-  load();
+/* ============ FILTROS UI ============ */
+function isOfferSection(section) {
+  return section && section.querySelector(".mk-f-group") === null;
 }
+
+function syncChips() {
+  document.querySelectorAll(".mk-chip").forEach(function (chip) {
+    const f = chip.getAttribute("data-f");
+    const v = chip.getAttribute("data-v");
+    chip.classList.toggle("on", STATE[f] === v);
+  });
+  document.querySelectorAll(".mk-f-toggle").forEach(function (sw) {
+    const section = sw.closest(".mk-f");
+    if (isOfferSection(section)) {
+      sw.classList.toggle("on", !!STATE.hideOffers);
+      sw.setAttribute("aria-checked", String(!!STATE.hideOffers));
+    } else {
+      sw.classList.toggle("on", section ? section.classList.contains("open") : false);
+    }
+  });
+}
+
+function setFilter(field, value) {
+  if (STATE[field] === value) {
+    delete STATE[field];
+  } else {
+    STATE[field] = value;
+  }
+  syncChips();
+  render();
+}
+
+function resetFilters() {
+  STATE = {};
+  document.getElementById("mk-world").value = "";
+  document.getElementById("mk-tier").value = "";
+  syncChips();
+  render();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".mk-chip").forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      setFilter(chip.getAttribute("data-f"), chip.getAttribute("data-v"));
+    });
+  });
+
+  document.querySelectorAll(".mk-f.lb").forEach(function (lb) {
+    lb.addEventListener("click", function (e) {
+      if (e.target.closest(".mk-f-toggle")) return;
+      const section = lb.parentElement;
+      if (isOfferSection(section)) return;
+      section.classList.toggle("open");
+      syncChips();
+    });
+  });
+
+  document.querySelectorAll(".mk-f-toggle").forEach(function (sw) {
+    sw.addEventListener("click", function (e) {
+      e.stopPropagation();
+      const section = sw.closest(".mk-f");
+      if (isOfferSection(section)) {
+        STATE.hideOffers = !STATE.hideOffers;
+      } else if (section.classList.contains("open")) {
+        section.classList.remove("open");
+      } else {
+        section.classList.add("open");
+      }
+      syncChips();
+      render();
+    });
+    sw.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); sw.click(); }
+    });
+  });
+
+  document.getElementById("mk-world").addEventListener("change", function () {
+    STATE.world = this.value;
+    render();
+  });
+  document.getElementById("mk-tier").addEventListener("change", function () {
+    STATE.tier = this.value;
+    render();
+  });
+  document.getElementById("mk-clear").addEventListener("click", resetFilters);
+
+  sidebarBtn.addEventListener("click", function () {
+    side.classList.toggle("open");
+    sidebarBtn.setAttribute("aria-expanded", String(side.classList.contains("open")));
+  });
+  document.getElementById("mk-side-close").addEventListener("click", function () {
+    side.classList.remove("open");
+    sidebarBtn.setAttribute("aria-expanded", "false");
+  });
+  document.addEventListener("click", function (e) {
+    if (side.classList.contains("open") && !side.contains(e.target) && !sidebarBtn.contains(e.target)) {
+      side.classList.remove("open");
+      sidebarBtn.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  load();
+});
 </script>
 <script src="track.js" defer></script>
 </body>
