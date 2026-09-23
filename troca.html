@@ -29,7 +29,7 @@ body{
 a{color:var(--blue);text-decoration:none}
 a:hover{text-decoration:underline}
 :focus-visible{outline:2px solid var(--purple);outline-offset:2px;border-radius:8px}
-button{font-family:inherit;cursor:pointer}
+button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit}
 
 /* ============ LAYOUT ============ */
 .mk-wrap{max-width:1180px;margin:0 auto;padding:20px 20px 40px}
@@ -52,8 +52,8 @@ button{font-family:inherit;cursor:pointer}
   font-size:12px;font-weight:600;padding:5px 10px;transition:.15s;
 }
 .mk-clear:hover{color:var(--red);border-color:rgba(248,113,113,.5)}
-.mk-f{display:block;width:100%;border:0;border-top:1px solid var(--border);padding:12px 0;text-align:left}
-.mk-f.lb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);font-weight:600}
+.mk-f{display:block;width:100%;border:0;border-top:1px solid var(--border);padding:12px 0;text-align:left;background:transparent}
+.mk-f.lb{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);font-weight:600;background:transparent}
 .mk-f.lb .mk-f-toggle{margin-left:auto}
 .mk-f-toggle{
   width:26px;height:15px;border-radius:999px;background:var(--border-2);position:relative;flex-shrink:0;transition:.2s;border:0;
