@@ -45,7 +45,7 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 .detail{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:26px 26px 30px;position:relative}
 .detail.vip{border-color:rgba(251,191,36,.45);background:linear-gradient(150deg,rgba(251,191,36,.06),var(--panel) 55%)}
 
-.d-top-row{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.d-top-row{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:0 0 16px}
 .d-badge-vip{
   display:inline-flex;align-items:center;gap:5px;align-self:flex-start;
   font-size:11px;font-weight:800;letter-spacing:.3px;color:#7c2d12;
@@ -61,17 +61,13 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 .d-meta{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);font-weight:600}
 .d-meta svg{display:block;flex-shrink:0;opacity:.75}
 
-.d-title{font-family:'Sora',sans-serif;font-size:30px;line-height:1.2;color:#fff;margin:6px 0 4px;word-wrap:break-word;overflow-wrap:anywhere}
-.d-title .d-tier{font-size:15px;font-weight:800;color:var(--purple);vertical-align:super;margin-left:4px}
-.d-sub{color:var(--muted);font-size:13.5px;margin:0 0 16px}
-.d-cats{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 0}
-.d-cat-chip{display:inline-flex;align-items:center;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.35);color:var(--purple);font-size:11px;font-weight:700;border-radius:999px;padding:3px 12px}
+/* ============ GRID: ANÚNCIO (esq) + ITEM (dir) ============ */
+.d-grid{display:grid;grid-template-columns:330px minmax(0,1fr);gap:26px;margin-top:4px;align-items:start}
+@media (max-width:840px){.d-grid{grid-template-columns:1fr}}
 
-/* ============ COLUNAS: IMAGEM + PREÇO ============ */
-.d-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:20px;align-items:start}
-@media (max-width:820px){.d-grid{grid-template-columns:1fr}}
+/* ------------ COLUNA ESQUERDA: INFOS DO ANÚNCIO ------------ */
+.d-info{display:flex;flex-direction:column;gap:12px;align-items:stretch}
 
-.d-visual{display:flex;flex-direction:column;align-items:center;gap:14px}
 .d-sprite{
   width:100%;min-height:150px;display:flex;align-items:center;justify-content:center;
   background:var(--panel-2);border:1px dashed var(--border-2);border-radius:18px;padding:20px;position:relative;
@@ -85,7 +81,14 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 }
 .d-ph{font-family:'Sora',sans-serif;font-size:52px;font-weight:800;color:#5b6b82}
 
-.d-server{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 13px;border-radius:999px;border:1px solid;font-size:13.5px;line-height:1}
+.d-price-block{background:var(--panel-2);border:1px solid var(--border-2);border-radius:16px;padding:14px 18px 16px;display:flex;flex-direction:column;gap:4px}
+.d-price-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:700;display:block}
+.d-price{font-family:'Sora',sans-serif;font-size:28px;font-weight:800;color:#fff;line-height:1.15;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;word-break:break-word}
+.d-price .d-coin{font-size:20px;display:inline-block;-webkit-text-fill-color:initial;margin-right:4px}
+.d-offers{font-size:17px;font-weight:800;color:var(--amber)}
+.d-offers-note{font-size:11.5px;color:var(--muted);font-weight:600}
+
+.d-server{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 13px;border-radius:999px;border:1px solid;font-size:13.5px;line-height:1;align-self:flex-start}
 .d-server b{font-weight:700;white-space:nowrap}
 .d-server.green{background:rgba(74,222,128,.12);border-color:rgba(74,222,128,.35)}
 .d-server.green b{color:var(--green)}
@@ -98,38 +101,41 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 .d-server.slate{background:rgba(142,160,184,.12);border-color:rgba(142,160,184,.35)}
 .d-server.slate b{color:var(--muted)}
 
-/* ============ PAINEL DE PREÇO ============ */
-.d-panel{background:var(--panel-2);border:1px solid var(--border-2);border-radius:16px;padding:18px 18px 16px}
-.d-price-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.d-price{font-family:'Sora',sans-serif;font-size:34px;font-weight:800;color:#fff;line-height:1.1;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.d-price .d-coin{font-size:22px;display:inline-block;-webkit-text-fill-color:initial;margin-right:4px}
-.d-offers{font-size:15px;font-weight:800;color:var(--amber)}
-.d-sep{border:0;border-top:1px solid var(--border);margin:14px 0}
-.d-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:700;display:block;margin:10px 0 6px}
+.d-seller{display:flex;align-items:center;gap:10px;background:var(--panel-2);border:1px solid var(--border-2);border-radius:14px;padding:10px 14px;font-size:13px;font-weight:600;width:100%}
+.d-ava{width:28px;height:28px;border-radius:50%;background:var(--grad);color:#04281a;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.d-check{color:var(--green);font-weight:900;font-size:12px;flex-shrink:0}
+
+.d-cats{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 0}
+.d-cat-chip{display:inline-flex;align-items:center;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.35);color:var(--purple);font-size:11px;font-weight:700;border-radius:999px;padding:3px 12px}
+
+/* ------------ COLUNA DIREITA: CARD DO ITEM ------------ */
+.d-item{display:flex;flex-direction:column;gap:16px;min-width:0}
+.d-item-title{font-family:'Sora',sans-serif;font-size:30px;line-height:1.2;color:#fff;margin:0;word-wrap:break-word;overflow-wrap:anywhere}
+.d-item-title .d-tier{font-size:15px;font-weight:800;color:var(--purple);vertical-align:super;margin-left:4px}
+.d-item-exam{color:var(--muted);font-size:13px;line-height:1.6;margin:0}
+
+.d-desc{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px 18px;white-space:pre-wrap;font-size:14px;color:var(--text);line-height:1.6}
+
+.d-contact-box{background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.3);border-radius:14px;padding:16px 18px}
+.d-contact-box h3{font-family:'Sora',sans-serif;font-size:15px;color:#fff;margin:0 0 6px;display:flex;align-items:center;gap:8px}
+.d-contact-box p{color:var(--muted);font-size:13px;margin:0 0 12px;line-height:1.5}
+.d-contact{width:100%;display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.35);color:var(--green);font-size:13px;font-weight:700;border-radius:999px;padding:9px 14px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-break:break-all}
+.d-contact::before{content:"\1F4E7";flex-shrink:0}
+
+/* ============ INFO DO ITEM (WIKI) ============ */
+.d-wiki{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px 18px}
+.d-wiki h3{font-family:'Sora',sans-serif;font-size:15px;color:#fff;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+.d-wiki .d-note{color:var(--muted);font-size:12.5px;margin:4px 0 12px;line-height:1.5}
+.d-grid-kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:4px 28px}
 .d-row{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13.5px;padding:5px 0;border-bottom:1px solid rgba(44,61,94,.4)}
 .d-row:last-child{border-bottom:0}
 .d-row .d-k{color:var(--muted)}
 .d-row .d-v{color:var(--text);font-weight:600;text-align:right;word-break:break-all}
-.d-user{display:inline-flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--border);border-radius:999px;padding:5px 14px 5px 5px;font-size:13px;margin-top:6px}
-.d-ava{width:24px;height:24px;border-radius:50%;background:var(--grad);color:#04281a;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.d-check{color:var(--green);font-weight:900;font-size:12px;flex-shrink:0}
-
-.d-contact{width:100%;display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.35);color:var(--green);font-size:13px;font-weight:700;border-radius:999px;padding:9px 14px;margin-top:12px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-break:break-all}
-.d-contact::before{content:"\1F4E7";flex-shrink:0}
-
-/* ============ DESCRIÇÃO ============ */
-.d-desc{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin-top:18px;white-space:pre-wrap;font-size:14px;color:var(--text);line-height:1.6}
-
-/* ============ INFO DO ITEM (WIKI) ============ */
-.d-wiki{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin-top:18px}
-.d-wiki h3{font-family:'Sora',sans-serif;font-size:15px;color:#fff;margin:0 0 12px;display:flex;align-items:center;gap:8px}
-.d-wiki .d-note{color:var(--muted);font-size:12.5px;margin:4px 0 12px;line-height:1.5}
-.d-grid-kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:4px 28px}
 .d-wiki .d-row{border-bottom:1px solid rgba(44,61,94,.4)}
 .d-wiki .d-row:last-child{border-bottom:0}
 
 /* ============ REFERÊNCIA DE PREÇO ============ */
-.d-ref{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin-top:18px}
+.d-ref{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px 18px}
 .d-ref h3{font-family:'Sora',sans-serif;font-size:15px;color:#fff;margin:0 0 12px;display:flex;align-items:center;gap:8px}
 .d-ref-nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
 .d-ref-num{background:var(--panel-2);border:1px solid var(--border-2);border-radius:12px;padding:12px 14px;text-align:center}
@@ -344,9 +350,16 @@ function renderizar(a, info, ref) {
   const priceBlock = (function () {
     const p = formatPrice(a.preco);
     if (p !== null) {
-      return '<div class="d-price-row"><div class="d-price"><span class="d-coin">&#128176;</span>' + p + '</div></div>';
+      return '<div class="d-price-block">'
+        + '<span class="d-price-lbl">Preço</span>'
+        + '<div class="d-price"><span class="d-coin">&#128176;</span>' + p + '</div>'
+        + '</div>';
     }
-    return '<div class="d-offers">Aceitando ofertas</div>';
+    return '<div class="d-price-block">'
+      + '<span class="d-price-lbl">Preço</span>'
+      + '<div class="d-offers">Aceitando ofertas</div>'
+      + '<span class="d-offers-note">Faça seu lance para o anunciante</span>'
+      + '</div>';
   })();
 
   const refBlock = (function () {
@@ -359,11 +372,11 @@ function renderizar(a, info, ref) {
     if (ref.media != null) {
       rows.push('<div class="d-ref-num"><div class="d-k">Média</div><div class="d-v">&#128176; ' + formatPrice(ref.media) + '</div></div>');
     }
-    rows.push('<div class="d-ref-num"><div class="d-k">Anúncios do item</div><div class="d-v">' + esc(ref.anuncios || 0) + '</div></div>');
+    rows.push('<div class="d-ref-num"><div class="d-k">Anúncios ativos</div><div class="d-v">' + esc(ref.anuncios || 0) + '</div></div>');
     return '<section class="d-ref">'
-      + '<h3>&#128202; Preço de referência</h3>'
+      + '<h3>&#128176; Preço de referência</h3>'
       + '<div class="d-ref-nums">' + rows.join("") + '</div>'
-      + (ref.atualizado_em ? '<p class="d-ref-note">Baseado nos anúncios ativos do mesmo item no MARKTRADE. Atualizado em ' + monthDay(ref.atualizado_em) + '.</p>' : '')
+      + (ref.atualizado_em ? '<p class="d-ref-note">Baseado em ' + esc(ref.anuncios || 0) + ' anúncios ativos do mesmo item no MARKTRADE. Atualizado em ' + monthDay(ref.atualizado_em) + '.</p>' : '')
       + '</section>';
   })();
 
@@ -391,46 +404,48 @@ function renderizar(a, info, ref) {
       + '</section>';
   })();
 
-  const userHtml = '<span class="d-user"><span class="d-ava">' + esc(initials(a.jogador)) + '</span>'
+  const descHtml = a.descricao
+    ? '<div class="d-desc">' + esc(a.descricao) + '</div>'
+    : '';
+
+  const sellerHtml = '<div class="d-seller"><span class="d-ava">' + esc(initials(a.jogador)) + '</span>'
     + '<span>' + esc(a.jogador || "Anônimo") + '</span>'
-    + (a.verificado ? '<span class="d-check" title="Verificado">&#10004;</span>' : '') + '</span>';
+    + (a.verificado ? '<span class="d-check" title="Verificado">&#10004;</span>' : '') + '</div>';
+
+  const contactBlock = a.contato
+    ? '<section class="d-contact-box">'
+      + '<h3>&#128172; Quer negociar este item?</h3>'
+      + '<p>Envie sua mensagem para o anunciante informando o seu lance.</p>'
+      + '<div class="d-contact" title="' + esc(a.contato) + '">' + esc(a.contato) + '</div>'
+      + '</section>'
+    : '';
 
   rootEl.innerHTML =
     '<div class="detail' + (a.is_destaque ? ' vip' : '') + '">'
     + vipBadge
     + '<div class="d-top-row">'
-    + '<div>'
     + '<span class="d-type ' + tipoCls + '">' + tipoLbl + '</span>'
     + ' <span class="d-meta">' + statusChiado(a.status) + '</span>'
-    + '<div class="d-title">' + esc(nome) + (tier ? '<span class="d-tier">Tier ' + tier + '</span>' : '') + '</div>'
-    + '<p class="d-sub">' + dateHtml + '</p>'
-    + (catHtml ? '<div class="d-cats">' + catHtml + '</div>' : '')
-    + '</div>'
+    + dateHtml
     + '</div>'
 
     + '<div class="d-grid">'
-    + '<div class="d-visual">'
+    + '<div class="d-info">'
     + '<div class="d-sprite">' + spriteHtml + '</div>'
-    + (world ? '<div class="d-server ' + serverColor(world) + '"><b>' + esc(world) + '</b></div>' : '')
-    + '</div>'
-
-    + '<div class="d-panel">'
     + priceBlock
-    + '<hr class="d-sep">'
-    + kvRow("Status", statusChiado(a.status))
-    + kvRow("Publicado em", formatDateTime(a.criado_em), false)
-    + (a.tipo === "compra" ? kvRow("Procurando", nome, false) : '')
-    + (a.aceita_ofertas ? '<div class="d-row"><span class="d-k">Ofertas</span><span class="d-v">Aceita ofertas</span></div>' : '')
-    + '<div class="d-label">Anunciante</div>'
-    + userHtml
-    + (a.contato ? '<div class="d-contact" title="' + esc(a.contato) + '">' + esc(a.contato) + '</div>' : '')
-    + '</div>'
+    + (world ? '<div class="d-server ' + serverColor(world) + '"><b>' + esc(world) + '</b></div>' : '')
+    + sellerHtml
+    + (catHtml ? '<div class="d-cats">' + catHtml + '</div>' : '')
     + '</div>'
 
-    + (a.descricao ? '<div class="d-desc">' + esc(a.descricao) + '</div>' : '')
-
+    + '<div class="d-item">'
+    + '<h2 class="d-item-title">' + esc(nome) + (tier ? '<span class="d-tier">Tier ' + tier + '</span>' : '') + '</h2>'
+    + descHtml
+    + contactBlock
     + wikiBlock
     + refBlock
+    + '</div>'
+    + '</div>'
     + '</div>';
 
   document.title = nome + " — MARKTRADE — BAPZX";

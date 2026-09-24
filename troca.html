@@ -33,10 +33,22 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 
 /* ============ LAYOUT ============ */
 .mk-wrap{max-width:1180px;margin:0 auto;padding:20px 20px 40px}
-.mk-hero{text-align:center;padding:30px 22px 6px}
-.mk-hero h1{font-family:'Sora',sans-serif;font-size:34px;color:#fff;margin:0 0 6px;letter-spacing:.5px}
+
+/* ------------ HERO (estilo TibiaTrade: busca + criar anúncio) ------------ */
+.mk-hero{text-align:center;padding:34px 22px 8px}
+.mk-hero h1{font-family:'Sora',sans-serif;font-size:36px;color:#fff;margin:0 0 6px;letter-spacing:.5px}
 .mk-hero h1 span{background:linear-gradient(135deg,#f59e0b,#f87171);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.mk-hero p{color:var(--muted);font-size:15px;margin:0}
+.mk-hero p{color:var(--muted);font-size:15px;margin:0 auto;max-width:560px}
+.mk-search{display:flex;gap:10px;max-width:680px;margin:22px auto 4px;flex-wrap:wrap}
+.mk-search input{
+  flex:1;min-width:220px;padding:12px 18px;border:1px solid var(--border-2);border-radius:12px;
+  background:var(--panel);color:var(--text);font-size:15px;font-family:inherit;transition:.15s;
+}
+.mk-search input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(96,165,250,.18)}
+.mk-search input::placeholder{color:var(--muted)}
+.mk-search .btn{font-size:14px;padding:12px 20px;border-radius:12px}
+.mk-search .btn.alt{background:transparent;border:1px solid var(--purple);color:var(--purple);box-shadow:none}
+.mk-search .btn.alt:hover{border-color:var(--purple);color:#fff;background:rgba(167,139,250,.12);transform:none;box-shadow:none}
 .mk-body{display:grid;grid-template-columns:270px 1fr;gap:22px;align-items:start;margin-top:26px}
 @media (max-width:900px){.mk-body{grid-template-columns:1fr}}
 
@@ -211,6 +223,11 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
   <header class="mk-hero">
     <h1>MARK<span>TRADE</span></h1>
     <p>Anúncios de troca de itens entre jogadores — venda, compra e negociação.</p>
+    <div class="mk-search" role="search">
+      <input type="search" id="mk-busca" placeholder="Buscar itens ou anúncios..." aria-label="Buscar itens ou anúncios">
+      <button type="button" class="btn" id="mk-search-go">&#128269; Buscar</button>
+      <a class="btn alt" href="https://bapzx-bot-tibia.onrender.com/login" style="color:inherit;text-decoration:none">+ Criar anúncio</a>
+    </div>
   </header>
 
   <button class="mk-filters-btn" id="mk-filters-btn" aria-expanded="false">
@@ -230,17 +247,9 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 
       <section class="mk-f">
         <button type="button" class="mk-f-hide">
-          <span>&#128176;</span><span>Hide taking offers</span>
+          <span>Ocultar &quot;aceitando ofertas&quot;</span>
           <span class="mk-sw" id="mk-hide-offers" role="switch" aria-checked="false" tabindex="0"></span>
         </button>
-      </section>
-
-      <section class="mk-f">
-        <span class="mk-f-title">Categoria</span>
-        <div class="mk-f-group">
-          <button type="button" class="mk-chip" data-f="cat" data-v="item"><span class="mk-cn">&#128737; Item</span></button>
-          <button type="button" class="mk-chip" data-f="cat" data-v="house"><span class="mk-cn">&#127969; House</span></button>
-        </div>
       </section>
 
       <section class="mk-f">
@@ -372,9 +381,10 @@ function restoreState() {
     const dados = JSON.parse(raw);
     if (typeof dados !== "object" || dados === null) return;
     STATE = {};
-    for (const k of ["cat", "hideOffers", "tipo", "icat", "voc", "tier", "world"]) {
+    for (const k of ["q", "hideOffers", "tipo", "icat", "voc", "tier", "world"]) {
       if (dados[k] !== undefined && dados[k] !== null) STATE[k] = dados[k];
     }
+    if (dados.q !== undefined) document.getElementById("mk-busca").value = dados.q;
     if (dados.world !== undefined) document.getElementById("mk-world").value = dados.world;
     if (dados.tierSel !== undefined) document.getElementById("mk-tier").value = dados.tierSel;
   } catch (e) { /* ignorar estado corrompido */ }
@@ -487,18 +497,21 @@ function renderCard(a) {
 
 function applyFilters(list) {
   const matches = [];
-  const cat = STATE.cat;
   const hideOffers = !!STATE.hideOffers;
   const world = (STATE.world || "").toLowerCase().trim();
   const tierRaw = STATE.tier;
   const tier = tierRaw === "" || tierRaw == null ? null : String(tierRaw);
+  const busca = (STATE.q || "").toLowerCase().trim();
 
   outer:
   for (let i = 0; i < list.length; i++) {
     const a = list[i];
     const nome = (a.nome || "").toLowerCase();
     const desc = (a.descricao || "").toLowerCase();
-    if (cat === "house" && !/house|guildhall|flat|apartment/.test(nome + " " + desc)) continue;
+    if (busca) {
+      const alvo = nome + " " + desc + " " + (a.jogador || "").toLowerCase();
+      if (alvo.indexOf(busca) === -1) continue;
+    }
     if (hideOffers && a.aceita_ofertas) continue;
     if (world && (a.world || "").toLowerCase().trim() !== world) continue;
 
@@ -516,7 +529,10 @@ function applyFilters(list) {
 }
 
 function render() {
-  const tudo = applyFilters(ALL);
+  let tudo;
+  try {
+    tudo = applyFilters(ALL);
+  } catch (e) { tudo = []; }
   const vips = tudo.filter(function (a) { return a.is_destaque; });
   const normais = tudo.filter(function (a) { return !a.is_destaque; });
 
@@ -525,10 +541,11 @@ function render() {
     grid.innerHTML = '<div class="mk-empty">Nenhum anúncio ativo no momento.<br>Volte em breve para ver novas trocas!</div>';
     return;
   }
-  countEl.textContent = ALL.length === 1 ? "1 anúncio ativo" : (ALL.length + " anúncios ativos");
 
-  const aplicouFiltro = tudo.length !== ALL.length;
-  if (aplicouFiltro && !tudo.length) {
+  const totalTxt = ALL.length === 1 ? "1 anúncio ativo" : (ALL.length + " anúncios ativos");
+  countEl.textContent = tudo.length === ALL.length ? totalTxt : (tudo.length + " resultado" + (tudo.length === 1 ? "" : "s"));
+
+  if (!tudo.length) {
     grid.innerHTML = '<div class="mk-empty">Nenhum anúncio corresponde aos filtros selecionados.<br><button class="mk-clear" id="mk-clear-inline" type="button" style="margin-top:14px">Limpar filtros</button></div>';
     const btn = document.getElementById("mk-clear-inline");
     if (btn) btn.addEventListener("click", function () { resetFilters(); });
@@ -595,7 +612,16 @@ function resetFilters() {
   STATE = {};
   document.getElementById("mk-world").value = "";
   document.getElementById("mk-tier").value = "";
+  document.getElementById("mk-busca").value = "";
   syncChips();
+  render();
+  saveState();
+}
+
+function aplicarBusca() {
+  const b = document.getElementById("mk-busca");
+  const v = (b.value || "").trim();
+  if (v) STATE.q = v; else delete STATE.q;
   render();
   saveState();
 }
@@ -627,6 +653,10 @@ document.addEventListener("DOMContentLoaded", function () {
     STATE.tier = this.value;
     render();
     saveState();
+  });
+  document.getElementById("mk-search-go").addEventListener("click", aplicarBusca);
+  document.getElementById("mk-busca").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") { e.preventDefault(); aplicarBusca(); }
   });
   document.getElementById("mk-clear").addEventListener("click", resetFilters);
 
