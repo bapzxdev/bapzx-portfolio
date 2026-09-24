@@ -84,7 +84,8 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 .d-price-block{background:var(--panel-2);border:1px solid var(--border-2);border-radius:16px;padding:14px 18px 16px;display:flex;flex-direction:column;gap:4px}
 .d-price-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:700;display:block}
 .d-price{font-family:'Sora',sans-serif;font-size:28px;font-weight:800;color:#fff;line-height:1.15;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;word-break:break-word}
-.d-price .d-coin{font-size:20px;display:inline-block;-webkit-text-fill-color:initial;margin-right:4px}
+.d-price .d-coin{display:inline-block;line-height:1;-webkit-text-fill-color:initial;margin-right:4px;vertical-align:-3px}
+.d-price .d-coin img{width:20px;height:20px;image-rendering:pixelated;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4));display:block}
 .d-offers{font-size:17px;font-weight:800;color:var(--amber)}
 .d-offers-note{font-size:11.5px;color:var(--muted);font-weight:600}
 
@@ -196,6 +197,13 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 
 <script>
 const API_BASE = "https://bapzx-bot-tibia.onrender.com";
+const MK_SPRITES = {
+  gold: "https://www.tibiawiki.com.br/images/b/b0/Gold_Coin.gif",
+  tc: "https://www.tibiawiki.com.br/images/5/55/Crystal_Coin.gif"
+};
+const coinImg = function (k, alt, w) {
+  return '<img src="' + MK_SPRITES[k] + '" alt="' + alt + '" width="' + w + '" height="' + w + '" loading="lazy">';
+};
 const rootEl = document.getElementById("ann-root");
 
 function params() {
@@ -352,7 +360,7 @@ function renderizar(a, info, ref) {
     if (p !== null) {
       return '<div class="d-price-block">'
         + '<span class="d-price-lbl">Preço</span>'
-        + '<div class="d-price"><span class="d-coin">&#128176;</span>' + p + '</div>'
+        + '<div class="d-price"><span class="d-coin">' + coinImg("gold", "Gold", 20) + '</span>' + p + '</div>'
         + '</div>';
     }
     return '<div class="d-price-block">'
@@ -366,15 +374,15 @@ function renderizar(a, info, ref) {
     if (!ref) return "";
     const rows = [];
     if (ref.min != null || ref.max != null) {
-      rows.push('<div class="d-ref-num"><div class="d-k">Mais barato</div><div class="d-v">&#128176; ' + formatPrice(ref.min) + '</div></div>');
-      rows.push('<div class="d-ref-num"><div class="d-k">Mais caro</div><div class="d-v">&#128176; ' + formatPrice(ref.max) + '</div></div>');
+      rows.push('<div class="d-ref-num"><div class="d-k">Mais barato</div><div class="d-v">' + coinImg("gold", "Gold", 15) + ' ' + formatPrice(ref.min) + '</div></div>');
+      rows.push('<div class="d-ref-num"><div class="d-k">Mais caro</div><div class="d-v">' + coinImg("gold", "Gold", 15) + ' ' + formatPrice(ref.max) + '</div></div>');
     }
     if (ref.media != null) {
-      rows.push('<div class="d-ref-num"><div class="d-k">Média</div><div class="d-v">&#128176; ' + formatPrice(ref.media) + '</div></div>');
+      rows.push('<div class="d-ref-num"><div class="d-k">Média</div><div class="d-v">' + coinImg("gold", "Gold", 15) + ' ' + formatPrice(ref.media) + '</div></div>');
     }
     rows.push('<div class="d-ref-num"><div class="d-k">Anúncios ativos</div><div class="d-v">' + esc(ref.anuncios || 0) + '</div></div>');
     return '<section class="d-ref">'
-      + '<h3>&#128176; Preço de referência</h3>'
+      + '<h3>' + coinImg("gold", "Gold", 18) + ' Preço de referência</h3>'
       + '<div class="d-ref-nums">' + rows.join("") + '</div>'
       + (ref.atualizado_em ? '<p class="d-ref-note">Baseado em ' + esc(ref.anuncios || 0) + ' anúncios ativos do mesmo item no MARKTRADE. Atualizado em ' + monthDay(ref.atualizado_em) + '.</p>' : '')
       + '</section>';

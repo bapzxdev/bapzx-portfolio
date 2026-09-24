@@ -59,6 +59,7 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 }
 .mk-side-hd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
 .mk-side-hd h2{font-family:'Sora',sans-serif;font-size:15px;color:#fff;margin:0;display:flex;align-items:center;gap:8px}
+.mk-side-hd h2 .mk-ico{width:15px;height:15px;display:inline-flex;align-items:center;justify-content:center;color:var(--muted)}
 .mk-clear{
   background:transparent;border:1px solid var(--border-2);color:var(--muted);border-radius:8px;
   font-size:12px;font-weight:600;padding:5px 10px;transition:.15s;
@@ -149,9 +150,11 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 .mk-sprite img{width:auto;height:78px;max-width:100%;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 3px 8px rgba(0,0,0,.45))}
 .mk-sprite .mk-ph{width:74px;height:74px;border-radius:14px;background:var(--panel-2);border:1px dashed var(--border-2);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:26px;font-weight:800;color:#5b6b82}
 .mk-price{display:flex;align-items:center;justify-content:center;gap:6px;font-size:17px;font-weight:800;color:#fff;margin:8px 0 12px;line-height:1.2}
-.mk-price .mk-coin{font-size:15px;display:inline-flex}
+.mk-price .mk-coin{display:inline-flex;align-items:center;gap:4px;font-size:15px;line-height:1}
+.mk-price .mk-coin img{width:17px;height:17px;display:block;image-rendering:pixelated;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}
 .mk-price .mk-val{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.mk-offers{font-size:14px;font-weight:800;color:var(--amber);margin:8px 0 12px;line-height:1.2}
+.mk-offers{display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:800;color:var(--amber);margin:8px 0 12px;line-height:1.2}
+.mk-offers img{width:15px;height:15px;display:block;image-rendering:pixelated;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}
 .mk-server{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 11px;border-radius:999px;border:1px solid;font-size:13px;line-height:1;margin:0 0 14px}
 .mk-server b{font-weight:700;white-space:nowrap}
 .mk-server.green{background:rgba(74,222,128,.12);border-color:rgba(74,222,128,.35)}
@@ -241,7 +244,9 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
     <!-- ============ MENU LATERAL DE FILTROS ============ -->
     <aside class="mk-side" id="mk-side" aria-label="Filtros dos anúncios">
       <div class="mk-side-hd">
-        <h2>&#128269; Filtros</h2>
+        <h2><span class="mk-ico">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+        </span> Filtros</h2>
         <button class="mk-clear" id="mk-clear" type="button">Limpar filtros</button>
         <button class="mk-side-close" id="mk-side-close" type="button" aria-label="Fechar filtros">&#10005;</button>
       </div>
@@ -287,13 +292,13 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
       <section class="mk-f">
         <span class="mk-f-title">Categoria do item</span>
         <div class="mk-f-group">
-          <button type="button" class="mk-chip" data-f="icat" data-v="soul core"><span class="mk-cn">&#128156; Soul Core</span></button>
-          <button type="button" class="mk-chip" data-f="icat" data-v="make believe"><span class="mk-cn">&#127912; Make Believe</span></button>
-          <button type="button" class="mk-chip" data-f="icat" data-v="rares"><span class="mk-cn">&#128142; Rares</span></button>
-          <button type="button" class="mk-chip" data-f="icat" data-v="primal ordeal"><span class="mk-cn">&#129424; Primal Ordeal</span></button>
-          <button type="button" class="mk-chip" data-f="icat" data-v="fansite"><span class="mk-cn">&#127807; Fansite</span></button>
-          <button type="button" class="mk-chip" data-f="icat" data-v="soul war"><span class="mk-cn">&#128128; Soul War</span></button>
-          <button type="button" class="mk-chip" data-f="icat" data-v="rotten blood"><span class="mk-cn">&#129656; Rotten Blood</span></button>
+          <button type="button" class="mk-chip" data-f="icat" data-v="soul core"><span class="mk-cn">Soul Core</span></button>
+          <button type="button" class="mk-chip" data-f="icat" data-v="make believe"><span class="mk-cn">Make Believe</span></button>
+          <button type="button" class="mk-chip" data-f="icat" data-v="rares"><span class="mk-cn">Rares</span></button>
+          <button type="button" class="mk-chip" data-f="icat" data-v="primal ordeal"><span class="mk-cn">Primal Ordeal</span></button>
+          <button type="button" class="mk-chip" data-f="icat" data-v="fansite"><span class="mk-cn">Fansite</span></button>
+          <button type="button" class="mk-chip" data-f="icat" data-v="soul war"><span class="mk-cn">Soul War</span></button>
+          <button type="button" class="mk-chip" data-f="icat" data-v="rotten blood"><span class="mk-cn">Rotten Blood</span></button>
         </div>
       </section>
 
@@ -358,6 +363,13 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 <script>
 const API_BASE = "https://bapzx-bot-tibia.onrender.com";
 const STORAGE_KEY = "marktrade-filtros";
+const MK_SPRITES = {
+  gold: "https://www.tibiawiki.com.br/images/b/b0/Gold_Coin.gif",
+  tc: "https://www.tibiawiki.com.br/images/5/55/Crystal_Coin.gif"
+};
+const coinImg = function (k, alt, w) {
+  return '<img src="' + MK_SPRITES[k] + '" alt="' + alt + '" width="' + w + '" height="' + w + '" loading="lazy">';
+};
 const grid = document.getElementById("mk-grid");
 const countEl = document.getElementById("mk-count");
 const side = document.getElementById("mk-side");
@@ -454,7 +466,7 @@ function renderCard(a) {
     : '';
 
   let spriteHtml;
-  const tierChip = (a.tier != null && a.tier !== "" ? '<span class="mk-tier-chip">&#128142; Tier ' + esc(String(a.tier).replace(/\.0$/,"")) + '</span>' : '');
+  const tierChip = (a.tier != null && a.tier !== "" ? '<span class="mk-tier-chip">Tier ' + esc(String(a.tier).replace(/\.0$/,"")) + '</span>' : '');
   if (a.sprite) {
     spriteHtml = tierChip + '<img src="' + esc(a.sprite) + '" alt="' + esc(nome) + '" loading="lazy" onerror="this.outerHTML=\'<div class=&quot;mk-ph&quot;>' + esc(initials(nome)) + '</div>\'">';
   } else {
@@ -462,12 +474,12 @@ function renderCard(a) {
   }
 
   const priceHtml = (function () {
-    const p = formatPrice(a.preco);
-    if (p !== null) {
-      return '<div class="mk-price"><span class="mk-coin" title="Gold coins (Tibia)">&#128176;</span><span class="mk-val">' + p + '</span></div>';
-    }
-    return '<div class="mk-offers">Aceitando ofertas</div>';
-  })();
+  const p = formatPrice(a.preco);
+  if (p !== null) {
+    return '<div class="mk-price"><span class="mk-coin">' + coinImg("gold", "Gold", 17) + '</span><span class="mk-val">' + p + '</span></div>';
+  }
+  return '<div class="mk-offers">' + coinImg("gold", "Gold", 15) + coinImg("tc", "Tibia Coin", 15) + '<span>Aceitando ofertas</span></div>';
+})();
 
   const serverHtml = (a.world ? '<div class="mk-server ' + serverColor(a.world) + '">'
     + '<b>' + esc(a.world) + '</b>'
