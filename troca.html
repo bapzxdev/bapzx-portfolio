@@ -86,6 +86,18 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 .mk-chip .mk-cn{font-weight:600;overflow:hidden;text-overflow:ellipsis}
 .mk-select{width:100%;padding:8px 10px;border:1px solid var(--border-2);border-radius:9px;background:var(--bg);color:var(--text);font-size:13px}
 .mk-select:focus-visible{outline:2px solid var(--purple);outline-offset:1px}
+.mk-world-pill{
+  position:relative;display:flex;align-items:center;gap:8px;width:100%;
+  background:var(--bg);border:1px solid var(--border-2);border-radius:10px;padding:9px 11px;
+  transition:border-color .15s;
+}
+.mk-world-pill:hover{border-color:var(--blue)}
+.mk-world-pill .mk-w-ico{display:inline-flex;align-items:center;justify-content:center;color:var(--muted);flex-shrink:0}
+.mk-world-pill .mk-w-lbl{flex:1;font-size:13px;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mk-world-pill .mk-w-chev{color:var(--muted);flex-shrink:0;transition:transform .15s}
+.mk-world-pill select{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;border:0;background:transparent}
+.mk-tier-group{grid-template-columns:repeat(6,1fr)}
+.mk-tier-group .mk-chip{padding:7px 0;font-size:12.5px}
 
 /* ============ CONTEÚDO / TOOLBAR ============ */
 .mk-main{min-width:0}
@@ -260,25 +272,32 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 
       <section class="mk-f">
         <span class="mk-f-title">Mundo</span>
-        <select class="mk-select" id="mk-world" aria-label="Selecionar mundo">
-          <option value="">Todos os mundos</option>
-          <option value="auroria">Auroria</option>
-          <option value="belaria">Belaria</option>
-          <option value="bellum">Bellum</option>
-          <option value="drakaria">Drakaria</option>
-          <option value="eldrian">Eldrian</option>
-          <option value="elysian">Elysian</option>
-          <option value="infernum i">Infernum I</option>
-          <option value="infernum ii">Infernum II</option>
-          <option value="infernum iii">Infernum III</option>
-          <option value="lunarian">Lunarian</option>
-          <option value="malveria">Malveria</option>
-          <option value="mystian">Mystian</option>
-          <option value="obsidian">Obsidian</option>
-          <option value="solarian">Solarian</option>
-          <option value="tenebrium">Tenebrium</option>
-          <option value="vesperia">Vesperia</option>
-        </select>
+        <div class="mk-world-pill">
+          <span class="mk-w-ico" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
+          </span>
+          <span class="mk-w-lbl" id="mk-world-lbl">Todos os mundos</span>
+          <svg class="mk-w-chev" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          <select id="mk-world" aria-label="Selecionar mundo">
+            <option value="">Todos os mundos</option>
+            <option value="auroria">Auroria</option>
+            <option value="belaria">Belaria</option>
+            <option value="bellum">Bellum</option>
+            <option value="drakaria">Drakaria</option>
+            <option value="eldrian">Eldrian</option>
+            <option value="elysian">Elysian</option>
+            <option value="infernum i">Infernum I</option>
+            <option value="infernum ii">Infernum II</option>
+            <option value="infernum iii">Infernum III</option>
+            <option value="lunarian">Lunarian</option>
+            <option value="malveria">Malveria</option>
+            <option value="mystian">Mystian</option>
+            <option value="obsidian">Obsidian</option>
+            <option value="solarian">Solarian</option>
+            <option value="tenebrium">Tenebrium</option>
+            <option value="vesperia">Vesperia</option>
+          </select>
+        </div>
       </section>
 
       <section class="mk-f">
@@ -315,20 +334,19 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 
       <section class="mk-f">
         <span class="mk-f-title">Tier</span>
-        <select class="mk-select" id="mk-tier" aria-label="Tier do item">
-          <option value="">Todos os tiers</option>
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
+        <div class="mk-f-group mk-tier-group">
+          <button type="button" class="mk-chip" data-f="tier" data-v="0"><span class="mk-cn">0</span></button>
+          <button type="button" class="mk-chip" data-f="tier" data-v="1"><span class="mk-cn">1</span></button>
+          <button type="button" class="mk-chip" data-f="tier" data-v="2"><span class="mk-cn">2</span></button>
+          <button type="button" class="mk-chip" data-f="tier" data-v="3"><span class="mk-cn">3</span></button>
+          <button type="button" class="mk-chip" data-f="tier" data-v="4"><span class="mk-cn">4</span></button>
+          <button type="button" class="mk-chip" data-f="tier" data-v="5"><span class="mk-cn">5</span></button>
+          <button type="button" class="mk-chip" data-f="tier" data-v="6"><span class="mk-cn">6</span></button>
+          <button type="button" class="mk-chip" data-f="tier" data-v="7"><span class="mk-cn">7</span></button>
+          <button type="button" class="mk-chip" data-f="tier" data-v="8"><span class="mk-cn">8</span></button>
+          <button type="button" class="mk-chip" data-f="tier" data-v="9"><span class="mk-cn">9</span></button>
+          <button type="button" class="mk-chip" data-f="tier" data-v="10"><span class="mk-cn">10</span></button>
+        </div>
       </section>
     </aside>
 
@@ -382,7 +400,6 @@ function saveState() {
   try {
     const dados = Object.assign({}, STATE);
     dados.world = document.getElementById("mk-world").value;
-    dados.tierSel = document.getElementById("mk-tier").value;
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(dados));
   } catch (e) { /* sessão indisponível */ }
 }
@@ -399,8 +416,14 @@ function restoreState() {
     }
     if (dados.q !== undefined) document.getElementById("mk-busca").value = dados.q;
     if (dados.world !== undefined) document.getElementById("mk-world").value = dados.world;
-    if (dados.tierSel !== undefined) document.getElementById("mk-tier").value = dados.tierSel;
   } catch (e) { /* ignorar estado corrompido */ }
+}
+
+function syncWorldLabel() {
+  const sel = document.getElementById("mk-world");
+  const lbl = document.getElementById("mk-world-lbl");
+  const escolhido = (sel.options[sel.selectedIndex] || {}).text;
+  lbl.textContent = escolhido || "Todos os mundos";
 }
 
 function esc(s) {
@@ -605,6 +628,11 @@ function syncChips() {
     const v = chip.getAttribute("data-v");
     chip.classList.toggle("on", STATE[f] === v);
   });
+  const sel = document.getElementById("mk-world");
+  if (sel && sel.value !== (STATE.world || "")) {
+    sel.value = STATE.world || "";
+  }
+  syncWorldLabel();
   const sw = document.getElementById("mk-hide-offers");
   sw.classList.toggle("on", !!STATE.hideOffers);
   sw.setAttribute("aria-checked", String(!!STATE.hideOffers));
@@ -624,7 +652,6 @@ function setFilter(field, value) {
 function resetFilters() {
   STATE = {};
   document.getElementById("mk-world").value = "";
-  document.getElementById("mk-tier").value = "";
   document.getElementById("mk-busca").value = "";
   syncChips();
   render();
@@ -659,11 +686,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.getElementById("mk-world").addEventListener("change", function () {
     STATE.world = this.value;
-    render();
-    saveState();
-  });
-  document.getElementById("mk-tier").addEventListener("change", function () {
-    STATE.tier = this.value;
+    syncWorldLabel();
     render();
     saveState();
   });
