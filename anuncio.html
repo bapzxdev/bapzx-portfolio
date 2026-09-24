@@ -407,10 +407,17 @@ function renderizar(a, info, ref, ficha) {
 
   const fichaLocalBlock = (function () {
     if (!ficha) return "";
+    function rotuloDano(f) {
+      if (!f.categoria) return f.tipo_dano ? "Dano Médio" : "Armadura";
+      if (f.categoria === "Armas") return "Dano Médio";
+      if (f.categoria === "Escudos" || f.categoria === "Spellbooks") return "Defesa";
+      if (f.categoria === "Aljavas") return "Volume";
+      return "Armadura";
+    }
     const etiquetas = [
       ["nivel", "Nível"], ["vocacao", "Vocação"], ["tipo_dano", "Tipo de dano"],
       ["bonus", "Bônus"], ["protecao", "Proteção"],
-      ["dano_medio", ficha.tipo_dano ? "Dano Médio" : "Armadura"],
+      ["dano_medio", rotuloDano(ficha)],
       ["slots", "Slots"], ["tier", "Tier"], ["peso", "Peso"], ["drop", "Obtido de"]
     ];
     const rows = [];
