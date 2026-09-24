@@ -68,44 +68,6 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 /* ------------ COLUNA ESQUERDA: INFOS DO ANÚNCIO ------------ */
 .d-info{display:flex;flex-direction:column;gap:12px;align-items:stretch}
 
-.d-sprite{
-  width:100%;min-height:150px;display:flex;align-items:center;justify-content:center;
-  background:var(--panel-2);border:1px dashed var(--border-2);border-radius:18px;padding:20px;position:relative;
-}
-.d-sprite img{width:auto;height:88px;max-width:100%;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 6px 16px rgba(0,0,0,.55))}
-.d-tier-chip{
-  position:absolute;top:10px;left:10px;display:inline-flex;align-items:center;gap:4px;
-  background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.45);color:var(--purple);
-  font-family:'Sora',sans-serif;font-size:11px;font-weight:800;letter-spacing:.3px;
-  border-radius:999px;padding:4px 10px;line-height:1;
-}
-.d-ph{font-family:'Sora',sans-serif;font-size:52px;font-weight:800;color:#5b6b82}
-
-.d-price-block{background:var(--panel-2);border:1px solid var(--border-2);border-radius:16px;padding:14px 18px 16px;display:flex;flex-direction:column;gap:4px}
-.d-price-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:700;display:block}
-.d-price{font-family:'Sora',sans-serif;font-size:28px;font-weight:800;color:#fff;line-height:1.15;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;word-break:break-word}
-.d-price .d-coin{display:inline-block;line-height:1;-webkit-text-fill-color:initial;margin-right:4px;vertical-align:-3px}
-.d-price .d-coin img{width:20px;height:20px;image-rendering:pixelated;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4));display:block}
-.d-offers{font-size:17px;font-weight:800;color:var(--amber)}
-.d-offers-note{font-size:11.5px;color:var(--muted);font-weight:600}
-
-.d-server{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 13px;border-radius:999px;border:1px solid;font-size:13.5px;line-height:1;align-self:flex-start}
-.d-server b{font-weight:700;white-space:nowrap}
-.d-server.green{background:rgba(74,222,128,.12);border-color:rgba(74,222,128,.35)}
-.d-server.green b{color:var(--green)}
-.d-server.amber{background:rgba(251,191,36,.12);border-color:rgba(251,191,36,.35)}
-.d-server.amber b{color:var(--amber)}
-.d-server.blue{background:rgba(96,165,250,.12);border-color:rgba(96,165,250,.35)}
-.d-server.blue b{color:var(--blue)}
-.d-server.purple{background:rgba(167,139,250,.14);border-color:rgba(167,139,250,.4)}
-.d-server.purple b{color:var(--purple)}
-.d-server.slate{background:rgba(142,160,184,.12);border-color:rgba(142,160,184,.35)}
-.d-server.slate b{color:var(--muted)}
-
-.d-seller{display:flex;align-items:center;gap:10px;background:var(--panel-2);border:1px solid var(--border-2);border-radius:14px;padding:10px 14px;font-size:13px;font-weight:600;width:100%}
-.d-ava{width:28px;height:28px;border-radius:50%;background:var(--grad);color:#04281a;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.d-check{color:var(--green);font-weight:900;font-size:12px;flex-shrink:0}
-
 .d-cats{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 0}
 .d-cat-chip{display:inline-flex;align-items:center;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.35);color:var(--purple);font-size:11px;font-weight:700;border-radius:999px;padding:3px 12px}
 
@@ -135,14 +97,15 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 .d-wiki .d-row{border-bottom:1px solid rgba(44,61,94,.4)}
 .d-wiki .d-row:last-child{border-bottom:0}
 
-/* ============ REFERÊNCIA DE PREÇO ============ */
-.d-ref{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px 18px}
-.d-ref h3{font-family:'Sora',sans-serif;font-size:15px;color:#fff;margin:0 0 12px;display:flex;align-items:center;gap:8px}
-.d-ref-nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
-.d-ref-num{background:var(--panel-2);border:1px solid var(--border-2);border-radius:12px;padding:12px 14px;text-align:center}
-.d-ref-num .d-k{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:700}
-.d-ref-num .d-v{font-size:17px;font-weight:800;color:var(--green);margin-top:2px}
-.d-ref-note{color:var(--muted);font-size:12px;margin-top:12px;line-height:1.5}
+/* ============ INFORMAÇÕES IMPORTANTES ============ */
+.d-important{background:var(--panel-2);border:1px solid var(--border-2);border-radius:14px;padding:16px 18px}
+.d-important h3{font-family:'Sora',sans-serif;font-size:15px;color:#fff;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+.d-imp-warn{background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.25);border-radius:10px;padding:11px 13px;font-size:13px;line-height:1.55;color:var(--text);margin-bottom:12px}
+.d-imp-warn b{color:var(--amber)}
+.d-important p{color:var(--muted);font-size:13px;margin:0 0 14px;line-height:1.55}
+.d-imp-links{display:flex;flex-direction:column;gap:10px}
+.d-imp-link{display:inline-flex;align-items:center;gap:7px;color:var(--blue);font-size:13px;font-weight:600}
+.d-imp-link:hover{color:#fff}
 
 /* ============ ESTADOS ============ */
 .ann-loading{text-align:center;color:var(--muted);padding:60px 0;font-size:14px}
@@ -151,6 +114,66 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 .ann-err{text-align:center;background:var(--panel);border:1px dashed var(--border-2);border-radius:16px;padding:46px 20px;color:var(--muted);font-size:14px;margin-top:14px}
 .ann-err .reload{display:inline-flex;align-items:center;background:var(--panel-2);border:1px solid var(--border-2);color:var(--text);font-size:13px;font-weight:700;border-radius:9px;padding:9px 16px;margin-top:16px}
 .ann-err .reload:hover{color:#fff;border-color:var(--blue)}
+
+/* ============ MINI CARD (esquerda) ============ */
+.mini-card{
+  background:var(--panel);border:1px solid var(--border);border-radius:16px;
+  padding:14px 14px 16px;display:flex;flex-direction:column;align-items:center;text-align:center;
+  color:var(--text);text-decoration:none;position:relative;width:100%;
+}
+.mini-card.vip{border-color:rgba(251,191,36,.45);background:linear-gradient(150deg,rgba(251,191,36,.08),var(--panel) 55%)}
+.mini-top{width:100%;display:flex;align-items:center;gap:10px;padding-bottom:10px;margin-bottom:10px;border-bottom:1px solid var(--border)}
+.mini-card.vip .mini-top{border-bottom:1px dashed rgba(251,191,36,.28)}
+.mini-type{display:inline-flex;align-items:center;border-radius:999px;padding:3px 11px;font-size:11.5px;font-weight:800;border:1px solid;letter-spacing:.2px;white-space:nowrap}
+.mini-type.venda{background:rgba(74,222,128,.12);border-color:rgba(74,222,128,.35);color:var(--green)}
+.mini-type.compra{background:rgba(96,165,250,.12);border-color:rgba(96,165,250,.35);color:var(--blue)}
+.mini-type.outro{background:rgba(167,139,250,.14);border-color:rgba(167,139,250,.4);color:var(--purple)}
+.mini-date{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);font-weight:600;white-space:nowrap}
+.mini-vip{margin-left:auto;flex-shrink:0;display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:800;letter-spacing:.3px;color:#7c2d12;background:var(--grad-vip);border-radius:999px;padding:3px 9px;box-shadow:0 4px 14px rgba(251,191,36,.35)}
+.mini-name{font-size:18px;font-weight:800;color:#fff;line-height:1.2;margin:0 6px 2px;word-wrap:break-word;overflow-wrap:anywhere;max-width:100%}
+.mini-cats{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+.mini-cat-chip{display:inline-flex;align-items:center;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.35);color:var(--purple);font-size:11px;font-weight:700;border-radius:999px;padding:3px 12px}
+.mini-sprite{width:100%;display:flex;align-items:center;justify-content:center;margin:14px 0;position:relative;flex-wrap:wrap;column-gap:8px}
+.mini-sprite img{width:auto;height:72px;max-width:100%;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 3px 8px rgba(0,0,0,.45))}
+.mini-sprite .mini-ph{width:66px;height:66px;border-radius:14px;background:var(--panel-2);border:1px dashed var(--border-2);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:24px;font-weight:800;color:#5b6b82}
+.mini-tier-chip{position:absolute;top:0;left:0;display:inline-flex;align-items:center;gap:4px;background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.45);color:var(--purple);font-family:'Sora',sans-serif;font-size:10px;font-weight:800;letter-spacing:.3px;border-radius:999px;padding:3px 9px;line-height:1}
+.mini-price{display:flex;align-items:center;justify-content:center;gap:6px;font-size:16px;font-weight:800;color:#fff;margin:8px 0 12px;line-height:1.2}
+.mini-price .mini-coin{display:inline-flex;align-items:center;gap:4px;font-size:14px;line-height:1}
+.mini-price .mini-coin img{width:17px;height:17px;display:block;image-rendering:pixelated;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}
+.mini-price .mini-val{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.mini-offers{display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;font-weight:800;color:var(--amber);margin:8px 0 12px;line-height:1.2}
+.mini-offers img{width:15px;height:15px;display:block;image-rendering:pixelated;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}
+.mini-meta{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:2px}
+.mini-server{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 11px;border-radius:999px;border:1px solid;font-size:12.5px;line-height:1}
+.mini-server b{font-weight:700;white-space:nowrap}
+.mini-server.green{background:rgba(74,222,128,.12);border-color:rgba(74,222,128,.35)}
+.mini-server.green b{color:var(--green)}
+.mini-server.amber{background:rgba(251,191,36,.12);border-color:rgba(251,191,36,.35)}
+.mini-server.amber b{color:var(--amber)}
+.mini-server.blue{background:rgba(96,165,250,.12);border-color:rgba(96,165,250,.35)}
+.mini-server.blue b{color:var(--blue)}
+.mini-server.purple{background:rgba(167,139,250,.14);border-color:rgba(167,139,250,.4)}
+.mini-server.purple b{color:var(--purple)}
+.mini-server.slate{background:rgba(142,160,184,.12);border-color:rgba(142,160,184,.35)}
+.mini-server.slate b{color:var(--muted)}
+.mini-user{display:inline-flex;align-items:center;gap:7px;background:var(--panel-2);border:1px solid var(--border-2);border-radius:999px;padding:3px 12px 3px 4px;font-size:12px;max-width:100%}
+.mini-ava{width:22px;height:22px;border-radius:50%;background:var(--grad);color:#04281a;font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mini-uname{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:150px}
+.mini-check{color:var(--green);font-weight:900;font-size:11px;flex-shrink:0}
+.mini-contact-row{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-start;margin-top:0;width:100%}
+.mini-contact{display:inline-flex;align-items:center;gap:6px;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.3);color:var(--green);font-size:11.5px;font-weight:700;border-radius:999px;padding:4px 12px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-break:break-all}
+.mini-contact::before{content:"\1F4E7";font-size:12px;line-height:1;flex-shrink:0}
+
+/* ============ COMPARTILHAR ============ */
+.d-share{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px 18px}
+.d-share h3{font-family:'Sora',sans-serif;font-size:15px;color:#fff;margin:0 0 6px;display:flex;align-items:center;gap:8px}
+.d-share p{color:var(--muted);font-size:13px;margin:0 0 10px;line-height:1.5}
+.d-share-note{font-size:12px;margin:0 0 14px!important}
+.d-share-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:700;display:block;margin-bottom:8px}
+.d-share-link{display:block;background:var(--panel-2);border:1px solid var(--border-2);border-radius:10px;padding:11px 14px;font-size:13px;font-weight:600;color:var(--text);word-break:break-all;margin-bottom:14px}
+.d-share-link:hover{text-decoration:none;border-color:var(--blue)}
+.d-copy{width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--grad);color:#06301f;font-family:'Sora',sans-serif;font-size:13.5px;font-weight:800;border-radius:10px;padding:11px 14px;transition:.15s}
+.d-copy:hover{filter:brightness(1.08)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
@@ -313,6 +336,7 @@ async function carregarDetalhe() {
 
   let info = null;
   let ref = null;
+  let ficha = null;
   if (anuncio.nome) {
     try {
       const ir = await fetch(API_BASE + "/api/item?nome=" + encodeURIComponent(anuncio.nome));
@@ -321,22 +345,21 @@ async function carregarDetalhe() {
         if (idata && idata.ok) {
           info = idata.info && Object.keys(idata.info).length ? idata.info : null;
           ref = idata.referencia && typeof idata.referencia === "object" ? idata.referencia : null;
+          ficha = idata.ficha_local && typeof idata.ficha_local === "object" ? idata.ficha_local : null;
         }
       }
     } catch (e) { /* info do wiki é bônus; segue sem ela */ }
   }
 
-  renderizar(anuncio, info, ref);
+  renderizar(anuncio, info, ref, ficha);
 }
 
-function renderizar(a, info, ref) {
+function renderizar(a, info, ref, ficha) {
   const tipo = (a.tipo || "venda").toLowerCase();
   const tipoCls = tipo === "compra" ? "compra" : (tipo === "venda" ? "venda" : "outro");
   const tipoLbl = tipo === "compra" ? "Comprando" : (tipo === "venda" ? "Vendendo" : "Troca");
   const nome = (a.nome || "Item").trim();
   const world = a.world || "";
-
-  const vipBadge = a.is_destaque ? '<span class="d-badge-vip">&#11088; Destaque VIP</span>' : '';
 
   const tier = (info && info.tier) ? esc(info.tier) : (a.tier != null && a.tier !== "" ? esc(String(a.tier).replace(/\.0$/,"")) : "");
   const dateHtml = a.criado_em
@@ -350,41 +373,56 @@ function renderizar(a, info, ref) {
     : '';
 
   const spriteHtml = a.sprite
-    ? tierChip + '<img src="' + esc(a.sprite) + '" alt="' + esc(nome) + '" onerror="this.outerHTML=\'<div class=&quot;d-ph&quot;>' + esc(initials(nome)) + '</div>\'">'
-    : '<div class="d-ph">' + esc(initials(nome)) + '</div>';
+    ? tierChip + '<img src="' + esc(a.sprite) + '" alt="' + esc(nome) + '" onerror="this.outerHTML=\'<div class=&quot;mini-ph&quot;>' + esc(initials(nome)) + '</div>\'">'
+    : '<div class="mini-ph">' + esc(initials(nome)) + '</div>';
 
-  const catHtml = (a.categoria ? '<span class="d-cat-chip">' + esc(a.categoria) + '</span>' : '');
+  const catHtml = (a.categoria ? '<div class="mini-cats"><span class="mini-cat-chip">' + esc(a.categoria) + '</span></div>' : '');
 
-  const priceBlock = (function () {
+  const miniPrice = (function () {
     const p = formatPrice(a.preco);
     if (p !== null) {
-      return '<div class="d-price-block">'
-        + '<span class="d-price-lbl">Preço</span>'
-        + '<div class="d-price"><span class="d-coin">' + coinImg("gold", "Gold", 20) + '</span>' + p + '</div>'
-        + '</div>';
+      return '<div class="mini-price"><span class="mini-coin">' + coinImg("gold", "Gold", 17) + '</span><span class="mini-val">' + p + '</span></div>';
     }
-    return '<div class="d-price-block">'
-      + '<span class="d-price-lbl">Preço</span>'
-      + '<div class="d-offers">Aceitando ofertas</div>'
-      + '<span class="d-offers-note">Faça seu lance para o anunciante</span>'
-      + '</div>';
+    return '<div class="mini-offers">' + coinImg("gold", "Gold", 15) + ' Aceitando ofertas</div>';
   })();
 
-  const refBlock = (function () {
-    if (!ref) return "";
+  const contactHtml = a.contato
+    ? '<div class="mini-contact" title="' + esc(a.contato) + '">' + esc(a.contato) + '</div>'
+    : '';
+
+  const shareLink = window.location.href;
+  const shareTitle = tipoLbl + " " + nome + (world ? " em " + world : "");
+
+  const descHtml = a.descricao
+    ? '<div class="d-desc">' + esc(a.descricao) + '</div>'
+    : '';
+
+  const contactBlock = a.contato
+    ? '<section class="d-contact-box">'
+      + '<h3>&#128172; Quer negociar este item?</h3>'
+      + '<p>Envie sua mensagem para o anunciante informando o seu lance.</p>'
+      + '<div class="d-contact" title="' + esc(a.contato) + '">' + esc(a.contato) + '</div>'
+      + '</section>'
+    : '';
+
+  const fichaLocalBlock = (function () {
+    if (!ficha) return "";
+    const mapLbl = {
+      nivel: "Nível", vocacao: "Vocação", elemento: "Elemento",
+      bonus: "Bônus", resistencia: "Resistência", atk: "Ataque",
+      def: "Defesa", slots: "Slots", peso: "Peso", drop: "Obtido de"
+    };
     const rows = [];
-    if (ref.min != null || ref.max != null) {
-      rows.push('<div class="d-ref-num"><div class="d-k">Mais barato</div><div class="d-v">' + coinImg("gold", "Gold", 15) + ' ' + formatPrice(ref.min) + '</div></div>');
-      rows.push('<div class="d-ref-num"><div class="d-k">Mais caro</div><div class="d-v">' + coinImg("gold", "Gold", 15) + ' ' + formatPrice(ref.max) + '</div></div>');
-    }
-    if (ref.media != null) {
-      rows.push('<div class="d-ref-num"><div class="d-k">Média</div><div class="d-v">' + coinImg("gold", "Gold", 15) + ' ' + formatPrice(ref.media) + '</div></div>');
-    }
-    rows.push('<div class="d-ref-num"><div class="d-k">Anúncios ativos</div><div class="d-v">' + esc(ref.anuncios || 0) + '</div></div>');
-    return '<section class="d-ref">'
-      + '<h3>' + coinImg("gold", "Gold", 18) + ' Preço de referência</h3>'
-      + '<div class="d-ref-nums">' + rows.join("") + '</div>'
-      + (ref.atualizado_em ? '<p class="d-ref-note">Baseado em ' + esc(ref.anuncios || 0) + ' anúncios ativos do mesmo item no MARKTRADE. Atualizado em ' + monthDay(ref.atualizado_em) + '.</p>' : '')
+    Object.keys(mapLbl).forEach(function (k) {
+      const v = ficha[k];
+      if (v == null || v === "") return;
+      rows.push(kvRow(mapLbl[k], esc(String(v))));
+    });
+    if (!rows.length) return "";
+    return '<section class="d-wiki d-ficha-local">'
+      + '<h3>&#128295; Ficha do item</h3>'
+      + '<p class="d-note">Dados da nossa base de itens.</p>'
+      + '<div class="d-grid-kv">' + rows.join("") + '</div>'
       + '</section>';
   })();
 
@@ -412,25 +450,20 @@ function renderizar(a, info, ref) {
       + '</section>';
   })();
 
-  const descHtml = a.descricao
-    ? '<div class="d-desc">' + esc(a.descricao) + '</div>'
-    : '';
-
-  const sellerHtml = '<div class="d-seller"><span class="d-ava">' + esc(initials(a.jogador)) + '</span>'
-    + '<span>' + esc(a.jogador || "Anônimo") + '</span>'
-    + (a.verificado ? '<span class="d-check" title="Verificado">&#10004;</span>' : '') + '</div>';
-
-  const contactBlock = a.contato
-    ? '<section class="d-contact-box">'
-      + '<h3>&#128172; Quer negociar este item?</h3>'
-      + '<p>Envie sua mensagem para o anunciante informando o seu lance.</p>'
-      + '<div class="d-contact" title="' + esc(a.contato) + '">' + esc(a.contato) + '</div>'
-      + '</section>'
-    : '';
+  const importantBlock = '<section class="d-important">'
+      + '<h3>&#128161; Informações importantes</h3>'
+      + '<div class="d-imp-warn"><b>&#9888;&#65039; O BAPZX não gerencia as transações.</b>'
+      + ' Nós simplesmente oferecemos uma forma conveniente para que o comprador e o vendedor se comuniquem e, portanto,'
+      + ' não nos responsabilizamos caso a transação dê errado de alguma forma.</div>'
+      + '<p>Nós recomendamos fortemente que você chame uma pessoa que possa ser confiada por ambas as partes para intermediar a transação.</p>'
+      + '<div class="d-imp-links">'
+      + '<a class="d-imp-link" href="troca.html?q=' + encodeURIComponent(nome) + '">&#128200; Ver histórico de negociações deste item</a>'
+      + '<a class="d-imp-link" href="contato.html">&#9873;&#65039; Você acha que este anúncio é falso ou induz ao erro?</a>'
+      + '</div>'
+      + '</section>';
 
   rootEl.innerHTML =
     '<div class="detail' + (a.is_destaque ? ' vip' : '') + '">'
-    + vipBadge
     + '<div class="d-top-row">'
     + '<span class="d-type ' + tipoCls + '">' + tipoLbl + '</span>'
     + ' <span class="d-meta">' + statusChiado(a.status) + '</span>'
@@ -439,24 +472,74 @@ function renderizar(a, info, ref) {
 
     + '<div class="d-grid">'
     + '<div class="d-info">'
-    + '<div class="d-sprite">' + spriteHtml + '</div>'
-    + priceBlock
-    + (world ? '<div class="d-server ' + serverColor(world) + '"><b>' + esc(world) + '</b></div>' : '')
-    + sellerHtml
-    + (catHtml ? '<div class="d-cats">' + catHtml + '</div>' : '')
+    + '<a class="mini-card' + (a.is_destaque ? ' vip' : '') + '" href="troca.html">'
+    + '<div class="mini-top">'
+    + '<span class="mini-type ' + tipoCls + '">' + tipoLbl + '</span>'
+    + (dateHtml ? '<span class="mini-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>' + formatDateTime(a.criado_em) + '</span>' : '')
+    + (a.is_destaque ? '<span class="mini-vip">&#11088; VIP</span>' : '')
+    + '</div>'
+    + '<div class="mini-name">' + esc(nome) + '</div>'
+    + catHtml
+    + '<div class="mini-sprite">' + spriteHtml + '</div>'
+    + miniPrice
+    + '<div class="mini-meta">'
+    + (world ? '<div class="mini-server ' + serverColor(world) + '"><b>' + esc(world) + '</b></div>' : '')
+    + '<span class="mini-user"><span class="mini-ava">' + esc(initials(a.jogador)) + '</span><span class="mini-uname">' + esc(a.jogador || "Anônimo") + '</span>' + (a.verificado ? '<span class="mini-check" title="Verificado">&#10004;</span>' : '') + '</span>'
+    + (contactHtml ? '<div class="mini-contact-row">' + contactHtml + '</div>' : '')
+    + '</div>'
+    + '</a>'
+
+    + '<section class="d-share">'
+    + '<h3>&#128279; Compartilhe este anúncio</h3>'
+    + '<p>Compartilhe o link deste anúncio em chats de grupo como Discord, WhatsApp e Telegram para aumentar a chance da troca acontecer.</p>'
+    + '<p class="d-share-note">Todas as informações do anúncio serão exibidas no app de chat quando você enviar o link.</p>'
+    + '<span class="d-share-lbl">Preview:</span>'
+    + '<a class="d-share-link" href="' + esc(shareLink) + '" target="_blank" rel="noopener">' + esc(shareTitle) + '</a>'
+    + '<button type="button" class="d-copy" id="d-copy-btn">&#128203; Copiar link</button>'
+    + '</section>'
     + '</div>'
 
     + '<div class="d-item">'
     + '<h2 class="d-item-title">' + esc(nome) + (tier ? '<span class="d-tier">Tier ' + tier + '</span>' : '') + '</h2>'
     + descHtml
     + contactBlock
+    + fichaLocalBlock
     + wikiBlock
-    + refBlock
+    + importantBlock
     + '</div>'
     + '</div>'
     + '</div>';
 
+  const copyBtn = document.getElementById("d-copy-btn");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", function () {
+      const done = function () {
+        copyBtn.innerHTML = '&#10004; Link copiado!';
+        setTimeout(function () { copyBtn.innerHTML = '&#128203; Copiar link'; }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(shareLink).then(done).catch(function () { fallbackCopy(); done(); });
+      } else {
+        fallbackCopy();
+        done();
+      }
+    });
+  }
+
   document.title = nome + " — MARKTRADE — BAPZX";
+}
+
+function fallbackCopy() {
+  try {
+    const ta = document.createElement("textarea");
+    ta.value = window.location.href;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+  } catch (e) { /* ignora */ }
 }
 
 carregarDetalhe();

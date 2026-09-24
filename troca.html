@@ -39,23 +39,13 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 .mk-hero h1{font-family:'Sora',sans-serif;font-size:36px;color:#fff;margin:0 0 6px;letter-spacing:.5px}
 .mk-hero h1 span{background:linear-gradient(135deg,#f59e0b,#f87171);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .mk-hero p{color:var(--muted);font-size:15px;margin:0 auto;max-width:560px}
-.mk-search{display:flex;gap:10px;max-width:680px;margin:22px auto 4px;flex-wrap:wrap}
-.mk-search input{
-  flex:1;min-width:220px;padding:12px 18px;border:1px solid var(--border-2);border-radius:12px;
-  background:var(--panel);color:var(--text);font-size:15px;font-family:inherit;transition:.15s;
-}
-.mk-search input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(96,165,250,.18)}
-.mk-search input::placeholder{color:var(--muted)}
-.mk-search .btn{font-size:14px;padding:12px 20px;border-radius:12px}
-.mk-search .btn.alt{background:transparent;border:1px solid var(--purple);color:var(--purple);box-shadow:none}
-.mk-search .btn.alt:hover{border-color:var(--purple);color:#fff;background:rgba(167,139,250,.12);transform:none;box-shadow:none}
 .mk-body{display:grid;grid-template-columns:270px 1fr;gap:22px;align-items:start;margin-top:26px}
 @media (max-width:900px){.mk-body{grid-template-columns:1fr}}
 
 /* ============ SIDEBAR FILTROS ============ */
 .mk-side{
   position:sticky;top:84px;background:var(--panel);border:1px solid var(--border);
-  border-radius:16px;padding:18px 16px;max-height:calc(100vh - 100px);overflow:auto;
+  border-radius:16px;padding:18px 16px;
 }
 .mk-side-hd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
 .mk-side-hd h2{font-family:'Sora',sans-serif;font-size:15px;color:#fff;margin:0;display:flex;align-items:center;gap:8px}
@@ -76,6 +66,10 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 .mk-sw.on::after{left:13px;background:var(--green)}
 .mk-f-title{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:600;display:block;margin-bottom:8px}
 .mk-f-group{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.mk-f-list{display:flex;flex-direction:column;gap:6px}
+.mk-f-list .mk-chip{justify-content:flex-start;text-align:left;border-radius:10px;padding:9px 12px;white-space:nowrap}
+.mk-f-list .mk-cn{flex:1;overflow:hidden;text-overflow:ellipsis}
+.mk-f-list .mk-en{flex-shrink:0;font-size:14px;line-height:1}
 .mk-chip{
   display:flex;align-items:center;justify-content:center;gap:6px;text-align:center;
   background:rgba(96,165,250,.07);border:1px solid var(--border-2);color:var(--text);
@@ -101,8 +95,29 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 
 /* ============ CONTEÚDO / TOOLBAR ============ */
 .mk-main{min-width:0}
-.mk-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.mk-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0 6px}
 .mk-toolbar h2{font-size:18px;color:#fff;margin:0;font-family:'Sora',sans-serif;display:flex;align-items:center;gap:8px}
+.mk-badge{
+  min-width:22px;height:22px;padding:0 6px;display:inline-flex;align-items:center;justify-content:center;
+  background:rgba(96,165,250,.9);color:#04281a;font-size:12px;font-weight:800;border-radius:999px;
+}
+.mk-toolbar .mk-count{color:var(--muted);font-size:13px}
+.mk-sort{display:flex;align-items:center;gap:8px;margin-left:auto}
+.mk-sort label{color:var(--muted);font-size:12.5px}
+.mk-sort select{
+  padding:7px 10px;border:1px solid var(--border-2);border-radius:9px;background:var(--bg);
+  color:var(--text);font-size:13px;font-family:inherit;
+}
+.mk-sort select:focus-visible{outline:2px solid var(--purple);outline-offset:1px}
+.mk-feat{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:14px 0 4px;padding:2px 0}
+.mk-feat-hd{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.mk-feat-hd span{font-size:13px;font-weight:700;color:#fbbf24;font-family:'Sora',sans-serif}
+.mk-feat-hd a{font-size:12.5px;font-weight:700;color:#f59e0b}
+.mk-search{display:flex;gap:8px;width:100%}
+.mk-search input{flex:1;min-width:200px;padding:10px 14px;border:1px solid var(--border-2);border-radius:10px;background:var(--bg);color:var(--text);font-size:13.5px;font-family:inherit;transition:.15s}
+.mk-search input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(96,165,250,.18)}
+.mk-search input::placeholder{color:var(--muted)}
+.mk-search .btn{font-size:13px;padding:10px 16px;border-radius:10px;white-space:nowrap}
 .mk-count{font-size:12.5px;color:var(--muted);font-weight:600;background:var(--panel);border:1px solid var(--border);border-radius:999px;padding:5px 12px}
 .mk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;margin:16px 0 36px}
 .mk-empty{
@@ -138,13 +153,13 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 .mk-card.vip{border-color:rgba(251,191,36,.45);background:linear-gradient(150deg,rgba(251,191,36,.08),var(--panel) 55%)}
 .mk-card.vip .mk-top{border-bottom:1px dashed rgba(251,191,36,.28)}
 .mk-badge-vip{
-  position:absolute;top:12px;right:12px;z-index:2;
+  margin-left:auto;flex-shrink:0;
   display:inline-flex;align-items:center;gap:4px;
   font-size:10.5px;font-weight:800;letter-spacing:.3px;color:#7c2d12;
   background:var(--grad-vip);border-radius:999px;padding:3px 9px;
   box-shadow:0 4px 14px rgba(251,191,36,.35);
 }
-.mk-top{width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;padding-bottom:10px;margin-bottom:10px;border-bottom:1px solid var(--border)}
+.mk-top{width:100%;display:flex;align-items:center;gap:10px;padding-bottom:10px;margin-bottom:10px;border-bottom:1px solid var(--border)}
 .mk-type{display:inline-flex;align-items:center;border-radius:999px;padding:3px 11px;font-size:11.5px;font-weight:800;border:1px solid;letter-spacing:.2px;white-space:nowrap}
 .mk-type.venda{background:rgba(74,222,128,.12);border-color:rgba(74,222,128,.35);color:var(--green)}
 .mk-type.compra{background:rgba(96,165,250,.12);border-color:rgba(96,165,250,.35);color:var(--blue)}
@@ -167,7 +182,8 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 .mk-price .mk-val{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .mk-offers{display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:800;color:var(--amber);margin:8px 0 12px;line-height:1.2}
 .mk-offers img{width:15px;height:15px;display:block;image-rendering:pixelated;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}
-.mk-server{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 11px;border-radius:999px;border:1px solid;font-size:13px;line-height:1;margin:0 0 14px}
+.mk-meta{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:2px}
+.mk-server{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 11px;border-radius:999px;border:1px solid;font-size:13px;line-height:1}
 .mk-server b{font-weight:700;white-space:nowrap}
 .mk-server.green{background:rgba(74,222,128,.12);border-color:rgba(74,222,128,.35)}
 .mk-server.green b{color:var(--green)}
@@ -186,7 +202,7 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 .mk-check{color:var(--green);font-weight:900;font-size:12px;flex-shrink:0}
 .mk-cats{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:6px}
 .mk-cat-chip{display:inline-flex;align-items:center;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.35);color:var(--purple);font-size:10.5px;font-weight:700;border-radius:999px;padding:2px 10px}
-.mk-contact-row{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:10px;width:100%}
+.mk-contact-row{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-start;margin-top:0;width:100%}
 .mk-contact{display:inline-flex;align-items:center;gap:6px;background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.3);color:var(--green);font-size:12px;font-weight:700;border-radius:999px;padding:4px 12px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-break:break-all}
 .mk-contact::before{content:"\1F4E7";font-size:12px;line-height:1;flex-shrink:0}
 
@@ -197,7 +213,7 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
     display:inline-flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--border);
     color:var(--text);font-size:13px;font-weight:700;border-radius:10px;padding:9px 14px;margin-bottom:12px;
   }
-  .mk-side{position:fixed;top:64px;left:0;right:0;bottom:0;z-index:60;border-radius:0;max-height:none;
+  .mk-side{position:fixed;top:64px;left:0;right:0;bottom:0;z-index:60;border-radius:0;overflow:auto;
     transform:translateX(-105%);transition:transform .25s ease;border-top:1px solid var(--border)}
   .mk-side.open{transform:none}
   .mk-side-close{
@@ -239,11 +255,6 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
   <header class="mk-hero">
     <h1>MARK<span>TRADE</span></h1>
     <p>Anúncios de troca de itens entre jogadores — venda, compra e negociação.</p>
-    <div class="mk-search" role="search">
-      <input type="search" id="mk-busca" placeholder="Buscar itens ou anúncios..." aria-label="Buscar itens ou anúncios">
-      <button type="button" class="btn" id="mk-search-go">&#128269; Buscar</button>
-      <a class="btn alt" href="https://bapzx-bot-tibia.onrender.com/login" style="color:inherit;text-decoration:none">+ Criar anúncio</a>
-    </div>
   </header>
 
   <button class="mk-filters-btn" id="mk-filters-btn" aria-expanded="false">
@@ -264,22 +275,15 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
       </div>
 
       <section class="mk-f">
-        <button type="button" class="mk-f-hide">
-          <span>Ocultar &quot;aceitando ofertas&quot;</span>
-          <span class="mk-sw" id="mk-hide-offers" role="switch" aria-checked="false" tabindex="0"></span>
-        </button>
-      </section>
-
-      <section class="mk-f">
-        <span class="mk-f-title">Mundo</span>
+        <span class="mk-f-title">Servidor</span>
         <div class="mk-world-pill">
           <span class="mk-w-ico" aria-hidden="true">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
           </span>
-          <span class="mk-w-lbl" id="mk-world-lbl">Todos os mundos</span>
+          <span class="mk-w-lbl" id="mk-world-lbl">Todos os servidores</span>
           <svg class="mk-w-chev" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-          <select id="mk-world" aria-label="Selecionar mundo">
-            <option value="">Todos os mundos</option>
+          <select id="mk-world" aria-label="Selecionar servidor">
+            <option value="">Todos os servidores</option>
             <option value="auroria">Auroria</option>
             <option value="belaria">Belaria</option>
             <option value="bellum">Bellum</option>
@@ -301,29 +305,29 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
       </section>
 
       <section class="mk-f">
-        <span class="mk-f-title">Tipo de anúncio</span>
-        <div class="mk-f-group">
+        <span class="mk-f-title">Categoria</span>
+        <div class="mk-f-list">
+          <button type="button" class="mk-chip" data-f="icat" data-v="soul core"><span class="mk-en">🟦</span><span class="mk-cn">Soul Core</span></button>
+          <button type="button" class="mk-chip" data-f="icat" data-v="make believe"><span class="mk-en">🎭</span><span class="mk-cn">Make Believe</span></button>
+          <button type="button" class="mk-chip" data-f="icat" data-v="rares"><span class="mk-en">💎</span><span class="mk-cn">Rares</span></button>
+          <button type="button" class="mk-chip" data-f="icat" data-v="primal ordeal"><span class="mk-en">🦤</span><span class="mk-cn">Primal Ordeal</span></button>
+          <button type="button" class="mk-chip" data-f="icat" data-v="fansite"><span class="mk-en">🍀</span><span class="mk-cn">Fansite</span></button>
+          <button type="button" class="mk-chip" data-f="icat" data-v="soul war"><span class="mk-en">💀</span><span class="mk-cn">Soul War</span></button>
+          <button type="button" class="mk-chip" data-f="icat" data-v="rotten blood"><span class="mk-en">🩸</span><span class="mk-cn">Rotten Blood</span></button>
+        </div>
+      </section>
+
+      <section class="mk-f">
+        <span class="mk-f-title">Tipo do anúncio</span>
+        <div class="mk-f-list">
           <button type="button" class="mk-chip" data-f="tipo" data-v="venda"><span class="mk-cn">Vendendo</span></button>
           <button type="button" class="mk-chip" data-f="tipo" data-v="compra"><span class="mk-cn">Comprando</span></button>
         </div>
       </section>
 
       <section class="mk-f">
-        <span class="mk-f-title">Categoria do item</span>
-        <div class="mk-f-group">
-          <button type="button" class="mk-chip" data-f="icat" data-v="soul core"><span class="mk-cn">Soul Core</span></button>
-          <button type="button" class="mk-chip" data-f="icat" data-v="make believe"><span class="mk-cn">Make Believe</span></button>
-          <button type="button" class="mk-chip" data-f="icat" data-v="rares"><span class="mk-cn">Rares</span></button>
-          <button type="button" class="mk-chip" data-f="icat" data-v="primal ordeal"><span class="mk-cn">Primal Ordeal</span></button>
-          <button type="button" class="mk-chip" data-f="icat" data-v="fansite"><span class="mk-cn">Fansite</span></button>
-          <button type="button" class="mk-chip" data-f="icat" data-v="soul war"><span class="mk-cn">Soul War</span></button>
-          <button type="button" class="mk-chip" data-f="icat" data-v="rotten blood"><span class="mk-cn">Rotten Blood</span></button>
-        </div>
-      </section>
-
-      <section class="mk-f">
         <span class="mk-f-title">Vocação</span>
-        <div class="mk-f-group">
+        <div class="mk-f-list">
           <button type="button" class="mk-chip" data-f="voc" data-v="knight"><span class="mk-cn">Knight</span></button>
           <button type="button" class="mk-chip" data-f="voc" data-v="paladin"><span class="mk-cn">Paladin</span></button>
           <button type="button" class="mk-chip" data-f="voc" data-v="sorcerer"><span class="mk-cn">Sorcerer</span></button>
@@ -334,27 +338,46 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 
       <section class="mk-f">
         <span class="mk-f-title">Tier</span>
-        <div class="mk-f-group mk-tier-group">
-          <button type="button" class="mk-chip" data-f="tier" data-v="0"><span class="mk-cn">0</span></button>
-          <button type="button" class="mk-chip" data-f="tier" data-v="1"><span class="mk-cn">1</span></button>
-          <button type="button" class="mk-chip" data-f="tier" data-v="2"><span class="mk-cn">2</span></button>
-          <button type="button" class="mk-chip" data-f="tier" data-v="3"><span class="mk-cn">3</span></button>
-          <button type="button" class="mk-chip" data-f="tier" data-v="4"><span class="mk-cn">4</span></button>
-          <button type="button" class="mk-chip" data-f="tier" data-v="5"><span class="mk-cn">5</span></button>
-          <button type="button" class="mk-chip" data-f="tier" data-v="6"><span class="mk-cn">6</span></button>
-          <button type="button" class="mk-chip" data-f="tier" data-v="7"><span class="mk-cn">7</span></button>
-          <button type="button" class="mk-chip" data-f="tier" data-v="8"><span class="mk-cn">8</span></button>
-          <button type="button" class="mk-chip" data-f="tier" data-v="9"><span class="mk-cn">9</span></button>
-          <button type="button" class="mk-chip" data-f="tier" data-v="10"><span class="mk-cn">10</span></button>
+        <div class="mk-f-list">
+          <button type="button" class="mk-chip" data-f="tier" data-v="1"><span class="mk-cn">Tier 1</span></button>
+          <button type="button" class="mk-chip" data-f="tier" data-v="2"><span class="mk-cn">Tier 2</span></button>
+          <button type="button" class="mk-chip" data-f="tier" data-v="3"><span class="mk-cn">Tier 3</span></button>
+          <button type="button" class="mk-chip" data-f="tier" data-v="4"><span class="mk-cn">Tier 4</span></button>
+          <button type="button" class="mk-chip" data-f="tier" data-v="5"><span class="mk-cn">Tier 5</span></button>
+          <button type="button" class="mk-chip" data-f="tier" data-v="6"><span class="mk-cn">Tier 6</span></button>
+          <button type="button" class="mk-chip" data-f="tier" data-v="7"><span class="mk-cn">Tier 7</span></button>
+          <button type="button" class="mk-chip" data-f="tier" data-v="8"><span class="mk-cn">Tier 8</span></button>
+          <button type="button" class="mk-chip" data-f="tier" data-v="9"><span class="mk-cn">Tier 9</span></button>
+          <button type="button" class="mk-chip" data-f="tier" data-v="10"><span class="mk-cn">Tier 10</span></button>
         </div>
       </section>
     </aside>
 
     <!-- ============ ANÚNCIOS ============ -->
     <div class="mk-main">
+      <div class="mk-search" role="search">
+        <input type="search" id="mk-busca" placeholder="Buscar itens ou anúncios..." aria-label="Buscar itens ou anúncios">
+        <button type="button" class="btn" id="mk-search-go">&#128269; Buscar</button>
+      </div>
+
       <div class="mk-toolbar">
-        <h2>Anúncios</h2>
+        <h2>Filtros</h2>
+        <span class="mk-badge" id="mk-filtros-count" title="Filtros ativos">0</span>
         <span class="mk-count" id="mk-count">Carregando…</span>
+        <div class="mk-sort">
+          <label for="mk-sort">Ordenar por</label>
+          <select id="mk-sort">
+            <option value="relevancia">Relevância</option>
+            <option value="recentes">Mais recentes</option>
+            <option value="preco-menor">Menor preço</option>
+            <option value="preco-maior">Maior preço</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mk-feat" id="mk-feat" hidden>
+        <span>Anúncios destacados</span>
+        <a href="https://bapzx-bot-tibia.onrender.com/login">&#10024; Destaque seu anúncio!</a>
       </div>
 
       <div class="mk-grid" id="mk-grid" aria-live="polite">
@@ -392,9 +415,60 @@ const grid = document.getElementById("mk-grid");
 const countEl = document.getElementById("mk-count");
 const side = document.getElementById("mk-side");
 const sidebarBtn = document.getElementById("mk-filters-btn");
+const badgeEl = document.getElementById("mk-filtros-count");
+const featBox = document.getElementById("mk-feat");
 
 let ALL = [];
 let STATE = {};
+let ORDEM = "relevancia";
+
+const VIP_TESTE = [
+  {id:"vip1",tipo:"venda",nome:"Espada Sagrada",descricao:"Teste VIP 1",sprite:"",preco:1500000,aceita_ofertas:false,world:"Lunarian",jogador:"Alex",categoria:"Soul War",contato:"@teste1",verificado:true,is_destaque:true,destaque_until:"",criado_em:"2026-09-24",tier:8},
+  {id:"vip2",tipo:"compra",nome:"Capa Real",descricao:"Teste VIP 2",sprite:"",preco:null,aceita_ofertas:true,world:"Belaria",jogador:"Bia",categoria:"Rares",contato:"@teste2",verificado:false,is_destaque:true,destaque_until:"",criado_em:"2026-09-24",tier:5},
+  {id:"vip3",tipo:"venda",nome:"Elmo Ancestral",descricao:"Teste VIP 3",sprite:"",preco:900000,aceita_ofertas:false,world:"Elysian",jogador:"Carlos",categoria:"Soul Core",contato:"@teste3",verificado:true,is_destaque:true,destaque_until:"",criado_em:"2026-09-24",tier:10},
+  {id:"vip4",tipo:"venda",nome:"Botas do Dragão",descricao:"Teste VIP 4",sprite:"",preco:2300000,aceita_ofertas:false,world:"Obsidian",jogador:"Duda",categoria:"Rotten Blood",contato:"@teste4",verificado:false,is_destaque:true,destaque_until:"",criado_em:"2026-09-24",tier:7}
+];
+
+const VIP_TESTE_MOD = VIP_TESTE.map(function (a) {
+  return Object.assign({}, a, { _teste: true });
+});
+
+function contarFiltros() {
+  let n = 0;
+  if (STATE.world) n++;
+  if (Array.isArray(STATE.icat) && STATE.icat.length) n++;
+  if (STATE.tipo) n++;
+  if (STATE.voc) n++;
+  if (STATE.tier) n++;
+  if (STATE.q) n++;
+  return n;
+}
+
+function syncBadge() {
+  if (badgeEl) badgeEl.textContent = String(contarFiltros());
+}
+
+function aplicarOrdenacao(lista) {
+  const arr = lista.slice();
+  if (ORDEM === "preco-menor") {
+    arr.sort(function (a, b) {
+      const pa = a.preco == null ? Infinity : Number(a.preco);
+      const pb = b.preco == null ? Infinity : Number(b.preco);
+      return pa - pb;
+    });
+  } else if (ORDEM === "preco-maior") {
+    arr.sort(function (a, b) {
+      const pa = a.preco == null ? -Infinity : Number(a.preco);
+      const pb = b.preco == null ? -Infinity : Number(b.preco);
+      return pb - pa;
+    });
+  } else if (ORDEM === "recentes") {
+    arr.sort(function (a, b) {
+      return String(b.criado_em || "").localeCompare(String(a.criado_em || ""));
+    });
+  }
+  return arr;
+}
 
 function saveState() {
   try {
@@ -414,6 +488,10 @@ function restoreState() {
     for (const k of ["q", "hideOffers", "tipo", "icat", "voc", "tier", "world"]) {
       if (dados[k] !== undefined && dados[k] !== null) STATE[k] = dados[k];
     }
+    if (dados.icat !== undefined && !Array.isArray(STATE.icat)) {
+      STATE.icat = String(dados.icat).split(",").filter(function (s) { return s && s.length; });
+      if (!STATE.icat.length) delete STATE.icat;
+    }
     if (dados.q !== undefined) document.getElementById("mk-busca").value = dados.q;
     if (dados.world !== undefined) document.getElementById("mk-world").value = dados.world;
   } catch (e) { /* ignorar estado corrompido */ }
@@ -422,8 +500,9 @@ function restoreState() {
 function syncWorldLabel() {
   const sel = document.getElementById("mk-world");
   const lbl = document.getElementById("mk-world-lbl");
+  if (!sel || !lbl) return;
   const escolhido = (sel.options[sel.selectedIndex] || {}).text;
-  lbl.textContent = escolhido || "Todos os mundos";
+  lbl.textContent = escolhido || "Todos os servidores";
 }
 
 function esc(s) {
@@ -515,19 +594,22 @@ function renderCard(a) {
   const catHtml = a.categoria ? '<span class="mk-cat-chip">' + esc(a.categoria) + '</span>' : '';
   const contactHtml = a.contato ? '<span class="mk-contact">' + esc(a.contato) + '</span>' : '';
 
-  return '<a class="mk-card' + (a.is_destaque ? ' vip' : '') + '" href="anuncio.html?id=' + encodeURIComponent(a.id) + '" aria-label="Ver detalhes do anúncio de ' + esc(nome) + '">'
-    + vipBadge
+  const hrefCard = a._teste ? "anuncio.html?id=vip-teste" : "anuncio.html?id=" + encodeURIComponent(a.id);
+  return '<a class="mk-card' + (a.is_destaque ? ' vip' : '') + '" href="' + hrefCard + '" aria-label="Ver detalhes do anúncio de ' + esc(nome) + '">'
     + '<div class="mk-top">'
     + '<span class="mk-type ' + tipoCls + '">' + tipoLbl + '</span>'
     + dateHtml
+    + vipBadge
     + '</div>'
     + '<div class="mk-name">' + esc(nome) + '</div>'
     + (catHtml ? '<div class="mk-cats">' + catHtml + '</div>' : '')
     + '<div class="mk-sprite">' + spriteHtml + '</div>'
     + priceHtml
+    + '<div class="mk-meta">'
     + serverHtml
     + '<span class="mk-user">' + avatarHtml + '<span class="mk-uname">' + esc(a.jogador || "Anônimo") + '</span>' + checkHtml + '</span>'
     + (contactHtml ? '<div class="mk-contact-row">' + contactHtml + '</div>' : '')
+    + '</div>'
     + '</a>';
 }
 
@@ -555,7 +637,16 @@ function applyFilters(list) {
       const v = STATE[k];
       if (!v) continue;
       const av = String((k === "icat" ? (a.categoria != null ? a.categoria : "") : (a[k] != null ? a[k] : ""))).toLowerCase().trim();
-      if (!av || av !== String(v).toLowerCase().trim()) continue outer;
+      if (k === "icat") {
+        const sel = Array.isArray(v) ? v : [v];
+        let bateu = false;
+        for (let j = 0; j < sel.length; j++) {
+          if (av === String(sel[j]).toLowerCase().trim()) { bateu = true; break; }
+        }
+        if (!bateu) continue outer;
+      } else {
+        if (!av || av !== String(v).toLowerCase().trim()) continue outer;
+      }
     }
 
     if (tier !== null && String(a.tier != null ? a.tier : "").replace(/\.0$/,"") !== tier) continue;
@@ -569,35 +660,33 @@ function render() {
   try {
     tudo = applyFilters(ALL);
   } catch (e) { tudo = []; }
+  if (ORDEM !== "relevancia") tudo = aplicarOrdenacao(tudo);
   const vips = tudo.filter(function (a) { return a.is_destaque; });
-  const normais = tudo.filter(function (a) { return !a.is_destaque; });
+
+  if (featBox) {
+    featBox.hidden = !(VIP_TESTE_MOD.length || vips.length);
+  }
+
+  grid.innerHTML = VIP_TESTE_MOD.map(renderCard).join("");
 
   if (!ALL.length) {
-    countEl.textContent = "Sem anúncios";
-    grid.innerHTML = '<div class="mk-empty">Nenhum anúncio ativo no momento.<br>Volte em breve para ver novas trocas!</div>';
+    countEl.textContent = "Sem resultados";
     return;
   }
 
-  const totalTxt = ALL.length === 1 ? "1 anúncio ativo" : (ALL.length + " anúncios ativos");
-  countEl.textContent = tudo.length === ALL.length ? totalTxt : (tudo.length + " resultado" + (tudo.length === 1 ? "" : "s"));
+  countEl.textContent = tudo.length + " resultado" + (tudo.length === 1 ? "" : "s");
 
   if (!tudo.length) {
-    grid.innerHTML = '<div class="mk-empty">Nenhum anúncio corresponde aos filtros selecionados.<br><button class="mk-clear" id="mk-clear-inline" type="button" style="margin-top:14px">Limpar filtros</button></div>';
-    const btn = document.getElementById("mk-clear-inline");
-    if (btn) btn.addEventListener("click", function () { resetFilters(); });
+    const btnExtra = '<div class="mk-empty">Nenhum anúncio corresponde aos filtros selecionados.<br><button class="mk-clear" id="mk-clear-inline" type="button" style="margin-top:14px">Limpar filtros</button></div>';
+    const btn = document.createElement("template");
+    btn.innerHTML = btnExtra.trim();
+    const b = btn.content.firstElementChild.querySelector("#mk-clear-inline");
+    if (b) b.addEventListener("click", function () { resetFilters(); });
+    grid.insertAdjacentHTML("beforeend", btnExtra);
     return;
   }
 
-  let html = "";
-  if (vips.length) {
-    html += '<div class="mk-hd-bar vip"><span class="mk-hd-ico">&#11088;</span> Destaques (VIP)</div>'
-      + vips.map(renderCard).join("");
-  }
-  if (normais.length) {
-    html += '<div class="mk-hd-bar recent"><span class="mk-hd-ico">&#9203;</span> Anúncios recentes</div>'
-      + normais.map(renderCard).join("");
-  }
-  grid.innerHTML = html;
+  grid.insertAdjacentHTML("beforeend", tudo.map(renderCard).join(""));
 }
 
 function showError() {
@@ -626,23 +715,31 @@ function syncChips() {
   document.querySelectorAll(".mk-chip").forEach(function (chip) {
     const f = chip.getAttribute("data-f");
     const v = chip.getAttribute("data-v");
-    chip.classList.toggle("on", STATE[f] === v);
+    const on = (f === "icat")
+      ? (Array.isArray(STATE.icat) && STATE.icat.indexOf(v) !== -1)
+      : (STATE[f] === v);
+    chip.classList.toggle("on", on);
   });
   const sel = document.getElementById("mk-world");
   if (sel && sel.value !== (STATE.world || "")) {
     sel.value = STATE.world || "";
   }
   syncWorldLabel();
-  const sw = document.getElementById("mk-hide-offers");
-  sw.classList.toggle("on", !!STATE.hideOffers);
-  sw.setAttribute("aria-checked", String(!!STATE.hideOffers));
+  syncBadge();
 }
 
 function setFilter(field, value) {
-  if (STATE[field] === value) {
-    delete STATE[field];
+  if (field === "icat") {
+    let arr = Array.isArray(STATE.icat) ? STATE.icat.slice() : [];
+    const i = arr.indexOf(value);
+    if (i >= 0) arr.splice(i, 1); else arr.push(value);
+    if (arr.length) STATE.icat = arr; else delete STATE.icat;
   } else {
-    STATE[field] = value;
+    if (STATE[field] === value) {
+      delete STATE[field];
+    } else {
+      STATE[field] = value;
+    }
   }
   syncChips();
   render();
@@ -662,6 +759,7 @@ function aplicarBusca() {
   const b = document.getElementById("mk-busca");
   const v = (b.value || "").trim();
   if (v) STATE.q = v; else delete STATE.q;
+  syncBadge();
   render();
   saveState();
 }
@@ -673,28 +771,24 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  document.getElementById("mk-hide-offers").addEventListener("click", function (e) {
-    e.stopPropagation();
-    STATE.hideOffers = !STATE.hideOffers;
-    syncChips();
-    render();
-    saveState();
+  document.getElementById("mk-search-go").addEventListener("click", aplicarBusca);
+  document.getElementById("mk-busca").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      aplicarBusca();
+    }
   });
-  document.getElementById("mk-hide-offers").addEventListener("keydown", function (e) {
-    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); this.click(); }
-  });
-
   document.getElementById("mk-world").addEventListener("change", function () {
     STATE.world = this.value;
     syncWorldLabel();
     render();
     saveState();
   });
-  document.getElementById("mk-search-go").addEventListener("click", aplicarBusca);
-  document.getElementById("mk-busca").addEventListener("keydown", function (e) {
-    if (e.key === "Enter") { e.preventDefault(); aplicarBusca(); }
-  });
   document.getElementById("mk-clear").addEventListener("click", resetFilters);
+  document.getElementById("mk-sort").addEventListener("change", function () {
+    ORDEM = this.value;
+    render();
+  });
 
   sidebarBtn.addEventListener("click", function () {
     side.classList.toggle("open");
