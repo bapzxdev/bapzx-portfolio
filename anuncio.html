@@ -407,16 +407,17 @@ function renderizar(a, info, ref, ficha) {
 
   const fichaLocalBlock = (function () {
     if (!ficha) return "";
-    const mapLbl = {
-      nivel: "Nível", vocacao: "Vocação", elemento: "Elemento",
-      bonus: "Bônus", resistencia: "Resistência", atk: "Ataque",
-      def: "Defesa", slots: "Slots", peso: "Peso", drop: "Obtido de"
-    };
+    const etiquetas = [
+      ["nivel", "Nível"], ["vocacao", "Vocação"], ["tipo_dano", "Tipo de dano"],
+      ["bonus", "Bônus"], ["protecao", "Proteção"],
+      ["dano_medio", ficha.tipo_dano ? "Dano Médio" : "Armadura"],
+      ["slots", "Slots"], ["tier", "Tier"], ["peso", "Peso"], ["drop", "Obtido de"]
+    ];
     const rows = [];
-    Object.keys(mapLbl).forEach(function (k) {
-      const v = ficha[k];
+    etiquetas.forEach(function (par) {
+      const v = ficha[par[0]];
       if (v == null || v === "") return;
-      rows.push(kvRow(mapLbl[k], esc(String(v))));
+      rows.push(kvRow(par[1], esc(String(v))));
     });
     if (!rows.length) return "";
     return '<section class="d-wiki d-ficha-local">'
