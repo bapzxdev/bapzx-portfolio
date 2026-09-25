@@ -422,16 +422,7 @@ let ALL = [];
 let STATE = {};
 let ORDEM = "relevancia";
 
-const VIP_TESTE = [
-  {id:"vip1",tipo:"venda",nome:"Espada Sagrada",descricao:"Teste VIP 1",sprite:"",preco:1500000,aceita_ofertas:false,world:"Lunarian",jogador:"Alex",categoria:"Soul War",contato:"@teste1",verificado:true,is_destaque:true,destaque_until:"",criado_em:"2026-09-24",tier:8},
-  {id:"vip2",tipo:"compra",nome:"Capa Real",descricao:"Teste VIP 2",sprite:"",preco:null,aceita_ofertas:true,world:"Belaria",jogador:"Bia",categoria:"Rares",contato:"@teste2",verificado:false,is_destaque:true,destaque_until:"",criado_em:"2026-09-24",tier:5},
-  {id:"vip3",tipo:"venda",nome:"Elmo Ancestral",descricao:"Teste VIP 3",sprite:"",preco:900000,aceita_ofertas:false,world:"Elysian",jogador:"Carlos",categoria:"Soul Core",contato:"@teste3",verificado:true,is_destaque:true,destaque_until:"",criado_em:"2026-09-24",tier:10},
-  {id:"vip4",tipo:"venda",nome:"Botas do Dragão",descricao:"Teste VIP 4",sprite:"",preco:2300000,aceita_ofertas:false,world:"Obsidian",jogador:"Duda",categoria:"Rotten Blood",contato:"@teste4",verificado:false,is_destaque:true,destaque_until:"",criado_em:"2026-09-24",tier:7}
-];
-
-const VIP_TESTE_MOD = VIP_TESTE.map(function (a) {
-  return Object.assign({}, a, { _teste: true });
-});
+const VIP_TESTE_MOD = [];
 
 function contarFiltros() {
   let n = 0;
@@ -594,7 +585,7 @@ function renderCard(a) {
   const catHtml = a.categoria ? '<span class="mk-cat-chip">' + esc(a.categoria) + '</span>' : '';
   const contactHtml = a.contato ? '<span class="mk-contact">' + esc(a.contato) + '</span>' : '';
 
-  const hrefCard = a._teste ? "anuncio.html?id=vip-teste" : "anuncio.html?id=" + encodeURIComponent(a.id);
+  const hrefCard = "anuncio.html?id=" + encodeURIComponent(a.id);
   return '<a class="mk-card' + (a.is_destaque ? ' vip' : '') + '" href="' + hrefCard + '" aria-label="Ver detalhes do anúncio de ' + esc(nome) + '">'
     + '<div class="mk-top">'
     + '<span class="mk-type ' + tipoCls + '">' + tipoLbl + '</span>'
