@@ -305,19 +305,6 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
       </section>
 
       <section class="mk-f">
-        <span class="mk-f-title">Categoria</span>
-        <div class="mk-f-list">
-          <button type="button" class="mk-chip" data-f="icat" data-v="soul core"><span class="mk-en">🟦</span><span class="mk-cn">Soul Core</span></button>
-          <button type="button" class="mk-chip" data-f="icat" data-v="make believe"><span class="mk-en">🎭</span><span class="mk-cn">Make Believe</span></button>
-          <button type="button" class="mk-chip" data-f="icat" data-v="rares"><span class="mk-en">💎</span><span class="mk-cn">Rares</span></button>
-          <button type="button" class="mk-chip" data-f="icat" data-v="primal ordeal"><span class="mk-en">🦤</span><span class="mk-cn">Primal Ordeal</span></button>
-          <button type="button" class="mk-chip" data-f="icat" data-v="fansite"><span class="mk-en">🍀</span><span class="mk-cn">Fansite</span></button>
-          <button type="button" class="mk-chip" data-f="icat" data-v="soul war"><span class="mk-en">💀</span><span class="mk-cn">Soul War</span></button>
-          <button type="button" class="mk-chip" data-f="icat" data-v="rotten blood"><span class="mk-en">🩸</span><span class="mk-cn">Rotten Blood</span></button>
-        </div>
-      </section>
-
-      <section class="mk-f">
         <span class="mk-f-title">Tipo do anúncio</span>
         <div class="mk-f-list">
           <button type="button" class="mk-chip" data-f="tipo" data-v="venda"><span class="mk-cn">Vendendo</span></button>
@@ -427,7 +414,6 @@ const VIP_TESTE_MOD = [];
 function contarFiltros() {
   let n = 0;
   if (STATE.world) n++;
-  if (Array.isArray(STATE.icat) && STATE.icat.length) n++;
   if (STATE.tipo) n++;
   if (STATE.voc) n++;
   if (STATE.tier) n++;
@@ -476,12 +462,8 @@ function restoreState() {
     const dados = JSON.parse(raw);
     if (typeof dados !== "object" || dados === null) return;
     STATE = {};
-    for (const k of ["q", "hideOffers", "tipo", "icat", "voc", "tier", "world"]) {
+    for (const k of ["q", "hideOffers", "tipo", "voc", "tier", "world"]) {
       if (dados[k] !== undefined && dados[k] !== null) STATE[k] = dados[k];
-    }
-    if (dados.icat !== undefined && !Array.isArray(STATE.icat)) {
-      STATE.icat = String(dados.icat).split(",").filter(function (s) { return s && s.length; });
-      if (!STATE.icat.length) delete STATE.icat;
     }
     if (dados.q !== undefined) document.getElementById("mk-busca").value = dados.q;
     if (dados.world !== undefined) document.getElementById("mk-world").value = dados.world;
@@ -624,20 +606,11 @@ function applyFilters(list) {
     if (hideOffers && a.aceita_ofertas) continue;
     if (world && (a.world || "").toLowerCase().trim() !== world) continue;
 
-    for (const k of ["tipo", "icat", "voc"]) {
+    for (const k of ["tipo", "voc"]) {
       const v = STATE[k];
       if (!v) continue;
-      const av = String((k === "icat" ? (a.categoria != null ? a.categoria : "") : (a[k] != null ? a[k] : ""))).toLowerCase().trim();
-      if (k === "icat") {
-        const sel = Array.isArray(v) ? v : [v];
-        let bateu = false;
-        for (let j = 0; j < sel.length; j++) {
-          if (av === String(sel[j]).toLowerCase().trim()) { bateu = true; break; }
-        }
-        if (!bateu) continue outer;
-      } else {
-        if (!av || av !== String(v).toLowerCase().trim()) continue outer;
-      }
+      const av = String(a[k] != null ? a[k] : "").toLowerCase().trim();
+      if (!av || av !== String(v).toLowerCase().trim()) continue outer;
     }
 
     if (tier !== null && String(a.tier != null ? a.tier : "").replace(/\.0$/,"") !== tier) continue;
@@ -706,10 +679,7 @@ function syncChips() {
   document.querySelectorAll(".mk-chip").forEach(function (chip) {
     const f = chip.getAttribute("data-f");
     const v = chip.getAttribute("data-v");
-    const on = (f === "icat")
-      ? (Array.isArray(STATE.icat) && STATE.icat.indexOf(v) !== -1)
-      : (STATE[f] === v);
-    chip.classList.toggle("on", on);
+    chip.classList.toggle("on", STATE[f] === v);
   });
   const sel = document.getElementById("mk-world");
   if (sel && sel.value !== (STATE.world || "")) {
@@ -720,17 +690,10 @@ function syncChips() {
 }
 
 function setFilter(field, value) {
-  if (field === "icat") {
-    let arr = Array.isArray(STATE.icat) ? STATE.icat.slice() : [];
-    const i = arr.indexOf(value);
-    if (i >= 0) arr.splice(i, 1); else arr.push(value);
-    if (arr.length) STATE.icat = arr; else delete STATE.icat;
+  if (STATE[field] === value) {
+    delete STATE[field];
   } else {
-    if (STATE[field] === value) {
-      delete STATE[field];
-    } else {
-      STATE[field] = value;
-    }
+    STATE[field] = value;
   }
   syncChips();
   render();
