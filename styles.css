@@ -100,12 +100,17 @@ header.hero::before{content:"";position:absolute;inset:0 0 auto 0;height:420px;b
 .toptag{display:inline-block;border:1px solid rgba(74,222,128,.4);color:#7ee7b5;background:rgba(74,222,128,.08);border-radius:999px;padding:6px 16px;font-size:13px;margin-bottom:22px;letter-spacing:.5px}
 .hero h1{font-size:64px;letter-spacing:6px;line-height:1.05;color:#fff}
 .hero h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 28px rgba(74,222,128,.35))}
+.coin-badge{display:inline-flex;align-items:center;justify-content:center;width:88px;height:88px;vertical-align:middle;background:radial-gradient(circle at 50% 38%,rgba(251,191,36,.30),rgba(251,191,36,.07) 58%,transparent 72%);-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:currentColor;filter:drop-shadow(0 0 22px rgba(251,191,36,.45));animation:coinfloat 3.2s ease-in-out infinite}
+.hero h1 .coin-badge{background:radial-gradient(circle at 50% 38%,rgba(251,191,36,.30),rgba(251,191,36,.07) 58%,transparent 72%);filter:drop-shadow(0 0 22px rgba(251,191,36,.45))}
+.coin-badge img{width:64px;height:64px;image-rendering:pixelated}
+.ic-coin{vertical-align:-3px}
+@keyframes coinfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 .hero h2{font-size:22px;font-weight:500;color:var(--muted);margin:14px 0 10px;letter-spacing:.5px}
 .hero p{max-width:640px;margin:0 auto 30px;color:var(--muted);font-size:17px}
 .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 .stats{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:52px}
 .stats b{display:block;font-family:'Sora',sans-serif;font-size:30px;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .stats span{font-size:13px;color:var(--muted)}
-@media(max-width:640px){.hero h1{font-size:34px;letter-spacing:3px}}
+@media(max-width:640px){.hero h1{font-size:34px;letter-spacing:3px}.coin-badge{width:58px;height:58px}.coin-badge img{width:44px;height:44px}}
 
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.coin-badge{animation:none}}
