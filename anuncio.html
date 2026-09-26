@@ -385,7 +385,7 @@ function renderizar(a, info, ref, ficha) {
     : '';
 
   const spriteHtml = a.sprite
-    ? tierChip + '<img src="' + esc(a.sprite) + '" alt="' + esc(nome) + '" onerror="this.outerHTML=\'<div class=&quot;mini-ph&quot;>' + esc(initials(nome)) + '</div>\'">'
+    ? tierChip + '<img src="' + esc(a.sprite) + '" alt="' + esc(nome) + '" width="96" height="72" loading="lazy" onerror="this.outerHTML=\'<div class=&quot;mini-ph&quot;>' + esc(initials(nome)) + '</div>\'">'
     : '<div class="mini-ph">' + esc(initials(nome)) + '</div>';
 
   const catHtml = (a.categoria ? '<div class="mini-cats"><span class="mini-cat-chip">' + esc(a.categoria) + '</span></div>' : '');

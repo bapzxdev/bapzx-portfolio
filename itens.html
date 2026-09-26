@@ -114,7 +114,7 @@ function esc(s) {
 }
 
 function renderCard(it, ctaPrefix) {
-  var img = it.imagem ? '<img class="item-img" src="' + esc(it.imagem) + '" alt="' + esc(it.nome) + '" onerror="this.style.display=\'none\'">' : '';
+  var img = it.imagem ? '<img class="item-img" src="' + esc(it.imagem) + '" alt="' + esc(it.nome) + '" loading="lazy" onerror="this.style.display=\'none\'">' : '';
   var cat = it.categoria ? '<div class="item-cat">' + esc(it.categoria) + '</div>' : '';
   var price = it.preco ? '<div class="item-price">' + esc(it.preco) + '</div>' : '';
   var desc = it.descricao ? '<p class="item-desc">' + esc(it.descricao) + '</p>' : '';
