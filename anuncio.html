@@ -4,7 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Anúncio — MARKTRADE — BAPZX</title>
-<meta name="description" content="Detalhes do anúncio de troca de itens no MARKTRADE BAPZX.">
+<meta name="description" content="Detalhes de anúncio de item no MARKTRADE BAPZX: preço, servidor, ficha do item e contato direto com o anunciante.">
+<link rel="canonical" href="https://bapzxdev.github.io/bapzx-portfolio/anuncio.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BAPZX">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Anúncio — MARKTRADE — BAPZX">
+<meta property="og:description" content="Detalhes de anúncio de item no MARKTRADE BAPZX: preço, servidor, ficha do item e contato direto com o anunciante.">
+<meta property="og:image" content="https://bapzxdev.github.io/bapzx-portfolio/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -544,7 +552,37 @@ function renderizar(a, info, ref, ficha) {
     });
   }
 
-  document.title = nome + " — MARKTRADE — BAPZX";
+  document.title = nome + " — " + (formatPrice(a.preco) ? formatPrice(a.preco) + " Gold | " : "") + "MARKTRADE — BAPZX";
+
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  if (ogTitle) ogTitle.setAttribute("content", document.title);
+  const ogDesc = document.querySelector('meta[property="og:description"]');
+  const desc = (a.tipo === "compra" ? "Comprando" : "Vendendo") + " " + nome
+    + (world ? " no servidor " + world : "")
+    + (a.preco != null ? " por " + formatPrice(a.preco) + " Gold" : ".")
+    + " Negocie pelo MARKTRADE BAPZX.";
+  if (ogDesc) ogDesc.setAttribute("content", desc.slice(0, 160));
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) metaDesc.setAttribute("content", desc.slice(0, 160));
+
+  const schema = document.createElement("script");
+  schema.type = "application/ld+json";
+  const itemSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": nome,
+    "category": a.categoria || "Item de Tibia",
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": "BRL",
+      "availability": "https://schema.org/InStock",
+      "seller": { "@type": "Organization", "name": "BAPZX" }
+    }
+  };
+  if (a.preco != null) itemSchema.offers.price = String(a.preco);
+  if (a.sprite) itemSchema.image = a.sprite;
+  schema.textContent = JSON.stringify(itemSchema);
+  (document.head || document.documentElement).appendChild(schema);
 }
 
 function fallbackCopy() {
