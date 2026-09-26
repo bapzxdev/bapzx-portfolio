@@ -468,7 +468,7 @@ function restoreState() {
     const dados = JSON.parse(raw);
     if (typeof dados !== "object" || dados === null) return;
     STATE = {};
-    for (const k of ["q", "hideOffers", "tipo", "voc", "tier", "world"]) {
+    for (const k of ["q", "tipo", "voc", "tier", "world"]) {
       if (dados[k] !== undefined && dados[k] !== null) STATE[k] = dados[k];
     }
     if (dados.q !== undefined) document.getElementById("mk-busca").value = dados.q;
@@ -610,11 +610,19 @@ function applyFilters(list) {
     if (hideOffers && a.aceita_ofertas) continue;
     if (world && (a.world || "").toLowerCase().trim() !== world) continue;
 
-    for (const k of ["tipo", "voc"]) {
+    for (const k of ["tipo"]) {
       const v = STATE[k];
       if (!v) continue;
       const av = String(a[k] != null ? a[k] : "").toLowerCase().trim();
       if (!av || av !== String(v).toLowerCase().trim()) continue outer;
+    }
+
+    if (STATE.voc) {
+      const alvo = String(STATE.voc).toLowerCase().trim();
+      const av = Array.isArray(a.voc)
+        ? a.voc.map(function (x) { return String(x).toLowerCase().trim(); })
+        : [];
+      if (av.indexOf(alvo) === -1) continue outer;
     }
 
     if (tier !== null && String(a.tier != null ? a.tier : "").replace(/\.0$/,"") !== tier) continue;
@@ -646,11 +654,9 @@ function render() {
 
   if (!tudo.length) {
     const btnExtra = '<div class="mk-empty">Nenhum anúncio corresponde aos filtros selecionados.<br><button class="mk-clear" id="mk-clear-inline" type="button" style="margin-top:14px">Limpar filtros</button></div>';
-    const btn = document.createElement("template");
-    btn.innerHTML = btnExtra.trim();
-    const b = btn.content.firstElementChild.querySelector("#mk-clear-inline");
-    if (b) b.addEventListener("click", function () { resetFilters(); });
     grid.insertAdjacentHTML("beforeend", btnExtra);
+    const b = document.getElementById("mk-clear-inline");
+    if (b) b.addEventListener("click", function () { resetFilters(); });
     return;
   }
 
