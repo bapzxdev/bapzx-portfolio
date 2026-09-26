@@ -143,8 +143,6 @@ button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit
 .mini-date{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);font-weight:600;white-space:nowrap}
 .mini-vip{margin-left:auto;flex-shrink:0;display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:800;letter-spacing:.3px;color:#7c2d12;background:var(--grad-vip);border-radius:999px;padding:3px 9px;box-shadow:0 4px 14px rgba(251,191,36,.35)}
 .mini-name{font-size:18px;font-weight:800;color:#fff;line-height:1.2;margin:0 6px 2px;word-wrap:break-word;overflow-wrap:anywhere;max-width:100%}
-.mini-cats{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-top:6px}
-.mini-cat-chip{display:inline-flex;align-items:center;background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.35);color:var(--purple);font-size:11px;font-weight:700;border-radius:999px;padding:3px 12px}
 .mini-sprite{width:100%;display:flex;align-items:center;justify-content:center;margin:14px 0;position:relative;flex-wrap:wrap;column-gap:8px}
 .mini-sprite img{width:auto;height:72px;max-width:100%;object-fit:contain;image-rendering:pixelated;filter:drop-shadow(0 3px 8px rgba(0,0,0,.45))}
 .mini-sprite .mini-ph{width:66px;height:66px;border-radius:14px;background:var(--panel-2);border:1px dashed var(--border-2);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:24px;font-weight:800;color:#5b6b82}
@@ -388,8 +386,6 @@ function renderizar(a, info, ref, ficha) {
     ? tierChip + '<img src="' + esc(a.sprite) + '" alt="' + esc(nome) + '" width="96" height="72" loading="lazy" onerror="this.outerHTML=\'<div class=&quot;mini-ph&quot;>' + esc(initials(nome)) + '</div>\'">'
     : '<div class="mini-ph">' + esc(initials(nome)) + '</div>';
 
-  const catHtml = (a.categoria ? '<div class="mini-cats"><span class="mini-cat-chip">' + esc(a.categoria) + '</span></div>' : '');
-
   const miniPrice = (function () {
     const p = formatPrice(a.preco);
     if (p !== null) {
@@ -505,7 +501,6 @@ function renderizar(a, info, ref, ficha) {
     + (a.is_destaque ? '<span class="mini-vip">&#11088; VIP</span>' : '')
     + '</div>'
     + '<div class="mini-name">' + esc(nome) + '</div>'
-    + catHtml
     + '<div class="mini-sprite">' + spriteHtml + '</div>'
     + miniPrice
     + '<div class="mini-meta">'
@@ -572,7 +567,7 @@ function renderizar(a, info, ref, ficha) {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": nome,
-    "category": a.categoria || "Item de Tibia",
+    "category": "Item de Tibia",
     "offers": {
       "@type": "Offer",
       "priceCurrency": "BRL",
