@@ -557,9 +557,10 @@ function renderizar(a, info, ref, ficha) {
   const ogTitle = document.querySelector('meta[property="og:title"]');
   if (ogTitle) ogTitle.setAttribute("content", document.title);
   const ogDesc = document.querySelector('meta[property="og:description"]');
-  const desc = (a.tipo === "compra" ? "Comprando" : "Vendendo") + " " + nome
-    + (world ? " no servidor " + world : "")
-    + (a.preco != null ? " por " + formatPrice(a.preco) + " Gold" : ".")
+  const peca = (a.tipo === "compra" ? "Comprando" : "Vendendo") + " " + nome
+    + (world ? " no servidor " + world : "");
+  const desc = peca
+    + (a.preco != null ? " por " + formatPrice(a.preco) + " Gold." : ".")
     + " Negocie pelo MARKTRADE BAPZX.";
   if (ogDesc) ogDesc.setAttribute("content", desc.slice(0, 160));
   const metaDesc = document.querySelector('meta[name="description"]');
