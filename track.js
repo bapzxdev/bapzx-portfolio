@@ -14,24 +14,24 @@
 
   function send() {
     try {
-      if (typeof navigator.sendBeacon !== "function") {
-        return;
-      }
       var last = 0;
       try { last = Number(localStorage.getItem(LAST_KEY) || 0); } catch (e) {}
       if (Date.now() - last < THROTTLE_MS) {
         return;
       }
       record();
-      var payload = new Blob(
-        [JSON.stringify({
-          pagina: pageName(),
-          referer: document.referrer,
-          altura: String(window.innerHeight)
-        })],
-        { type: "application/json" }
-      );
-      navigator.sendBeacon(API, payload);
+      var payload = JSON.stringify({
+        pagina: pageName(),
+        referer: document.referrer,
+        altura: String(window.innerHeight)
+      });
+      fetch(API, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+        credentials: "omit",
+        keepalive: true
+      }).catch(function () {});
     } catch (e) {}
   }
 
