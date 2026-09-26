@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://bapzxdev.github.io/bapzx-portfolio/sitemap.xml
+
+# Diretrizes e contexto para agentes de IA
+# https://bapzxdev.github.io/bapzx-portfolio/llms.txt

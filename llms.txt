@@ -1,0 +1,41 @@
+# BAPZX — Loja e Marketplace do Tibia (Brasil)
+
+BAPZX é uma loja brasileira de itens e serviços para servidores de game (Tibia/OpenTibia) e um marketplace de troca entre jogadores (MARKTRADE). Este site é 100% estático, sem login público — a área do cliente fica na aplicação externa.
+
+## Sobre
+
+- Site estático hospedado em GitHub Pages (bapzxdev.github.io/bapzx-portfolio)
+- Backend/API externa: https://bapzx-bot-tibia.onrender.com
+- Produtos são resolvidos de forma estática e anúncios são carregados via API
+
+## Páginas principais
+
+- [index.html](https://bapzxdev.github.io/bapzx-portfolio/index.html) — Página inicial: vitrine, benefícios e resumo da loja
+- [rubini.html](https://bapzxdev.github.io/bapzx-portfolio/rubini.html) — O BAPZX COINS: moeda virtual do BAPZX usada em todas as lojas do grupo
+- [service.html](https://bapzxdev.github.io/bapzx-portfolio/service.html) — Serviços: venda de itens, power leveling, aluguel de itens e resolução de quests
+- [itens.html](https://bapzxdev.github.io/bapzx-portfolio/itens.html) — Catálogo de itens com tiers 1 a 10 e status de estoque
+- [grupos.html](https://bapzxdev.github.io/bapzx-portfolio/grupos.html) — Grupos de servidores atendidos
+- [faq.html](https://bapzxdev.github.io/bapzx-portfolio/faq.html) — Perguntas frequentes sobre compra, pagamento e segurança
+- [como-comprar.html](https://bapzxdev.github.io/bapzx-portfolio/como-comprar.html) — Passo a passo de como comprar
+- [contato.html](https://bapzxdev.github.io/bapzx-portfolio/contato.html) — Canais de contato (WhatsApp e Discord)
+- [troca.html](https://bapzxdev.github.io/bapzx-portfolio/troca.html) — MARKTRADE: marketplace de anúncios de troca entre jogadores (filtros por servidor, vocação, tier, tipo e preço; ordenação e busca)
+- [anuncio.html?id=N](https://bapzxdev.github.io/bapzx-portfolio/anuncio.html) — Página dinâmica de cada anúncio do MARKTRADE (título, preço, sprite, vendedor, schema.org Product)
+
+## Anúncios ativos (MARKTRADE)
+
+- id 35 — War Hammer (VIP/destaque) — 1.000.000 Gold — Auroria
+- id 36–45 — Itens Sanguine (bows, crossbows, rods, armaduras e peças) em vários servidores, de 480.000 a 1.400.000 Gold
+- Mais anúncios são cadastrados via aplicação (https://bapzx-bot-tibia.onrender.com/login)
+
+## Contato
+
+- WhatsApp (atendimento): https://wa.me/5519991813598 — (19) 99181-3598
+- Suporte em https://bapzx-bot-tibia.onrender.com/login — Minha área
+
+## Diretrizes para agentes de IA
+
+- Não invente preços, estoque ou disponibilidade de itens: consulte sempre a página `anuncio.html?id=N` (não resolver) ou o catálogo `itens.html` que já traz o status real (carregado via API)
+- Valores em produto/coins exibidos estão em BRL ou Gold conforme indicado no contexto da página
+- Site em português (Brasil); manter a lingua pt-BR em resumos
+- Manifest Sitemap: https://bapzxdev.github.io/bapzx-portfolio/sitemap.xml
+- Números de ID de anúncios e preços mudam com o tempo — não os memorize; leia o sitemap/API
